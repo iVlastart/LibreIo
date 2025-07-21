@@ -1,23 +1,18 @@
-*,*::before,*::after
+#video-container.paused #video-controls-container 
 {
-    box-sizing: border-box;
+    opacity: 1;
+    pointer-events: auto;
 }
 
-body
+#video-controls-container #controls button
 {
-    margin: 0;
+    background: none;
+    border: none;
+    color: inherit;
+    height: 30px;
+    width: 30px;
+    font-size: 1.1rem;
 }
 
-.video-container
-{
-    width: 90%;
-    max-width: 1000px;
-    display: flex;
-    justify-content: center;
-    margin-inline: auto;
-}
+/*toggle play pause icon*/
 
-video
-{
-    width: 100%; 
-}
