@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$title}}</title>
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/css/video-player.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css','resources/css/video-player.css','resources/js/app.js' , 'resources/js/video-player.js'])
 </head>
 <body class="">
+    @include('layouts.navigation')
     <x-video-player/>
 </body>
 </html>
