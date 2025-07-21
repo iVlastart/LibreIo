@@ -1,0 +1,23 @@
+*,*::before,*::after
+{
+    box-sizing: border-box;
+}
+
+body
+{
+    margin: 0;
+}
+
+.video-container
+{
+    width: 90%;
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    margin-inline: auto;
+}
+
+video
+{
+    width: 100%;
+}
