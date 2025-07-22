@@ -29,7 +29,14 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'file'=>['required', 'mimes:mp4', 'max:40000'],
+            'title'=>'required',
+            'descr'=>'required',
+            "visibility"=>'required'
+        ]);
+        dd($request->all());
+        Post::create();
     }
 
     /**

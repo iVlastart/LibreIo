@@ -15,12 +15,8 @@ Route::get('/home', function () {
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
 
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::get('/post/create', function(){
-        return view('post.create.create')->with(['id' => null]);;
-    })->name('create.new');
-    Route::get('/post/create/{id}', function($id){
-        return view('post.create.create')->with(['id'=>$id]);
-    })->name('create.post');
+    Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+    Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
 });
 
 Route::get('/profile/{username}', [ProfileController::class, 'openProfile'])->name('profile.home');
