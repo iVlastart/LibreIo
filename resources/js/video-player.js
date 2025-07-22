@@ -7,6 +7,7 @@ const muteBtn = document.querySelector('.mute-btn');
 const volumeSlider = document.querySelector('.volume-slider');
 const currentTime = document.querySelector('.current-time');
 const totalTime = document.querySelector('.total-time');
+const timelineContainer = document.querySelector('.timeline-container');
 const video = document.querySelector('video');
 
 document.addEventListener('keydown', e=>{
@@ -83,7 +84,11 @@ video.addEventListener('leavepictureinpicture', ()=>container.classList.remove('
 video.addEventListener('loadeddata', ()=>totalTime.textContent=formatDuration(video.duration));
 video.addEventListener('timeupdate', ()=>{
     currentTime.textContent = formatDuration(video.currentTime);
-})
+    const percentage = video.currentTime / video.duration;
+    timelineContainer.style.setProperty('--progress-position', percentage);
+});
+timelineContainer.addEventListener('mousemove', timelineUpdate);
+//timelineContainer.addEventListener('mousedown', toggleScrubbing);
 
 //view mods
 function togglePlay()
@@ -131,6 +136,42 @@ function formatDuration(t)
         ? `${m}:${leadingZeroFormatter.format(s)}`
         : `${h}:${m}:${leadingZeroFormatter.format(s)}`;
 }
+
+function timelineUpdate(e)
+{
+    const rect = timelineContainer.getBoundingClientRect();
+    const percentage = Math.min(Math.max(0, e.x - rect.x), rect.width)/rect.width;
+    timelineContainer.style.setProperty('--preview-position', percentage);
+
+    if(isScrubbing)
+    {
+        e.preventDefault();
+        timelineContainer.style.setProperty('--progress-position', percentage);
+    }
+}
+
+/*let isScrubbing = false;
+let wasPaused;
+function toggleScrubbing(e)
+{
+    const rect = timelineContainer.getBoundingClientRect();
+    const percentage = Math.min(Math.max(0, e.x - rect.x), rect.width)/rect.width;
+
+    isScrubbing = (e.buttons && 1)===1;
+    container.classList.toggle('scrubbing', isScrubbing);
+    if(isScrubbing)
+    {
+        wasPaused = video.paused;
+        video.pause();
+    }
+    else
+    {
+        video.currentTime = percentage * video.duration;
+        if(!wasPaused) video.play();
+    }
+
+    timelineUpdate(e);
+}*/
 
 /*function skip(t)
 {
