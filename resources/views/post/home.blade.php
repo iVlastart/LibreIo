@@ -9,7 +9,7 @@
 </head>
 <body>
     <x-app-layout>
-        <x-video-player/>
+        <x-video-player :src="$src"/>
     </x-app-layout>
 </body>
 </html>

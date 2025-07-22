@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use \Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -30,13 +32,20 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'file'=>['required', 'mimes:mp4', 'max:40000'],
+            'src'=>['required', 'mimes:mp4', 'max:40000'],
             'title'=>'required',
             'descr'=>'required',
-            "visibility"=>'required'
+            "visibility"=>'required',
         ]);
-        dd($request->all());
-        Post::create();
+        $file = $data['src'];
+        unset($data['src']);
+        $data['src'] = $file->store('uploads', 'public');
+        $data['thumbnail'] = 'thumbnail'; //this will contain the thumbnail in the future
+        $data['user_id'] = Auth::id();
+        $data['slug'] = $this->makeUniqueSlug($data['title']);
+        $data['published_at'] = now();
+        Post::create($data);
+        return redirect()->route('profile.home', ['username' => Auth::user()->name]);
     }
 
     /**
@@ -46,7 +55,8 @@ class PostController extends Controller
     {
         $post = DB::table('posts')->where('slug',$id)->get()->first();
         return view('post.home')->with([
-            'title' => $post->title
+            'title' => $post->title,
+            'src'=>$post->src
         ]);
     }
 
@@ -72,5 +82,19 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+    }
+
+    private function makeUniqueSlug($title) {
+        $slug = Str::slug($title);
+        $originalSlug = $slug;
+        $count = 1;
+
+        // Loop until slug is unique in posts table
+        while (Post::where('slug', $slug)->exists()) {
+            $slug = $originalSlug . '-' . $count;
+            $count++;
+        }
+
+        return $slug;
     }
 }

@@ -19,11 +19,11 @@
                                 
                                 <div class="mt-4">
                                     <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload file</label>
-                                    <input name="file" class="block w-full text-sm text-gray-900 border 
+                                    <input name="src" class="block w-full text-sm text-gray-900 border 
                                             border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
                                             id="file_input" type="file">
                                     <p class="mt-1 text-sm text-gray-500" id="file_input_help">MP4 (MAX. 40MB).</p>
-                                    <x-input-error :messages="$errors->get('file')" class="mt-2"/>
+                                    <x-input-error :messages="$errors->get('src')" class="mt-2"/>
                                 </div>
                                 
                                 
@@ -43,8 +43,8 @@
                                 <div class="mt-4">
                                     <label for="Visibility" class="block mb-2 text-sm font-medium text-gray-900">Select visibility</label>
                                     <select id="visibility" name="visibility" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                        <option value="Pu">Public</option>
-                                        <option value="Pr">Private</option>
+                                        <option value="public">Public</option>
+                                        <option value="private">Private</option>
                                     </select>
                                 </div>
                                 
