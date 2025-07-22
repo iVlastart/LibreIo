@@ -87,7 +87,7 @@ video.addEventListener('timeupdate', ()=>{
     const percentage = video.currentTime / video.duration;
     timelineContainer.style.setProperty('--progress-position', percentage);
 });
-timelineContainer.addEventListener('mousemove', timelineUpdate);
+//timelineContainer.addEventListener('mousemove', timelineUpdate);
 //timelineContainer.addEventListener('mousedown', toggleScrubbing);
 
 //view mods
@@ -137,7 +137,7 @@ function formatDuration(t)
         : `${h}:${m}:${leadingZeroFormatter.format(s)}`;
 }
 
-function timelineUpdate(e)
+/*function timelineUpdate(e)
 {
     const rect = timelineContainer.getBoundingClientRect();
     const percentage = Math.min(Math.max(0, e.x - rect.x), rect.width)/rect.width;
@@ -150,7 +150,7 @@ function timelineUpdate(e)
     }
 }
 
-/*let isScrubbing = false;
+let isScrubbing = false;
 let wasPaused;
 function toggleScrubbing(e)
 {
