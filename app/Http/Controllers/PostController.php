@@ -91,12 +91,16 @@ class PostController extends Controller
 
     public function like(Request $request)
     {
-        $data['user_id'] = Auth::id();
-        $data['post_id'] = $request->post;
-        $data['status'] = $request->status;
-        dd($data);
-        Likes::create($data);
-        alert('submitted');
+        $validated = $request->validate([
+            'status' => 'required|in:like,dislike',
+            'post_id' => 'required|exists:posts,id',
+        ]);
+
+        $validated['user_id'] = Auth::id();
+
+        Likes::create($validated);
+
+        return response()->json(['message' => 'Like saved.']);
     }
 
     private function makeUniqueSlug($title) {
