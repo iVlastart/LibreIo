@@ -18,6 +18,7 @@ document.addEventListener('keydown', e=>{
         case " ":
                 if(tagName==="button") return;
             case "k":
+                e.preventDefault();
                 togglePlay();
                 break;
             case "i":
@@ -51,8 +52,6 @@ video.addEventListener('pause', ()=>container.classList.add('paused'));
 
 document.addEventListener('fullscreenchange',()=>container.classList.toggle('full-screen', document.fullscreenElement));
 
-//volume listeners
-muteBtn.addEventListener('click', toggleMute);
 video.addEventListener('volumechange', ()=>{
     volumeSlider.value = video.volume;
     let volumeLevel;
@@ -72,7 +71,9 @@ volumeSlider.addEventListener('input', e=>{
     video.muted = e.target.value===0;
 });
 
-
+document.querySelectorAll('form').forEach(form =>
+  form.addEventListener('submit', e => e.preventDefault())
+);
 //view mods listeners
 miniPlayerBtn.addEventListener('click', toggleMiniPlayer);
 theaterBtn.addEventListener('click', toggleTheater);

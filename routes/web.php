@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function(){
 
 //like dislike a post
 Route::middleware(['auth', 'verified'])->group(function(){
-    Route::post('/like', [PostController::class, 'like']);
+    Route::post('/like', [PostController::class, 'like'])->name('post.like');
 });
 
 Route::get('/profile/{username}', [ProfileController::class, 'openProfile'])->name('profile.home');

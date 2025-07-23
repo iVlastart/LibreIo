@@ -87,7 +87,15 @@ class PostController extends Controller
 
     public function like(Request $request)
     {
-        
+        switch($request->status==='like')
+        {
+            case 'like':
+                //add a like
+                break;
+            case 'dislike':
+                //add a dislike
+                break;
+        }
     }
 
     private function makeUniqueSlug($title) {
