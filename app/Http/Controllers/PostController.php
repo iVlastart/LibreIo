@@ -57,11 +57,22 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = DB::table('posts')->where('slug',$id)->get()->first();
+        $isLiked = Likes::where('user_id', Auth::id())
+                        ->where('post_id', $post->id)
+                        ->where('status', 'like')
+                        ->first();
+        $isDisliked = Likes::where('user_id', Auth::id())
+                        ->where('post_id', $post->id)
+                        ->where('status', 'dislike')
+                        ->first();
+        
         return view('post.home')->with([
             'id'=>$post->id,
             'title' => $post->title,
             'src'=>$post->src,
-            'date'=>$post->published_at
+            'date'=>$post->published_at,
+            'isLiked'=>$isLiked,
+            'isDisliked'=>$isDisliked
         ]);
     }
 
@@ -98,7 +109,17 @@ class PostController extends Controller
 
         $validated['user_id'] = Auth::id();
 
-        Likes::create($validated);
+        $exists = Likes::where('user_id', Auth::id())
+                        ->where('post_id', $validated['post_id'])
+                        ->first();
+
+        if($exists)
+        {
+            Likes::where('user_id', Auth::id())
+                ->where('post_id', $validated['post_id'])
+                ->delete();
+        }
+        else Likes::create($validated);
 
         return response()->json(['message' => 'Like saved.']);
     }

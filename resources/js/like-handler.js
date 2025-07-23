@@ -15,7 +15,8 @@ $(() => {
             url: '/like',
             data: data,
             success: ()=>{
-                alert('liked');
+                const svg = $(this).find('svg path');
+                svg.attr('fill', svg.attr('fill') === 'currentColor' ? 'white' : 'currentColor');
             }
         });
     });
@@ -28,7 +29,8 @@ $(() => {
             url: '/like',
             data: data,
             success: ()=>{
-                alert('liked');
+                const svg = $(this).find('svg path');
+                svg.attr('fill', svg.attr('fill') === 'currentColor' ? 'white' : 'currentColor');
             }
         });
     });
