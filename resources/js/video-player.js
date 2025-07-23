@@ -71,9 +71,6 @@ volumeSlider.addEventListener('input', e=>{
     video.muted = e.target.value===0;
 });
 
-document.querySelectorAll('form').forEach(form =>
-  form.addEventListener('submit', e => e.preventDefault())
-);
 //view mods listeners
 miniPlayerBtn.addEventListener('click', toggleMiniPlayer);
 theaterBtn.addEventListener('click', toggleTheater);

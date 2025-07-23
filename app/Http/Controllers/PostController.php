@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Likes;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use \Illuminate\Support\Str;
+
+use function Laravel\Prompts\alert;
 
 class PostController extends Controller
 {
@@ -55,6 +58,7 @@ class PostController extends Controller
     {
         $post = DB::table('posts')->where('slug',$id)->get()->first();
         return view('post.home')->with([
+            'id'=>$post->id,
             'title' => $post->title,
             'src'=>$post->src,
             'date'=>$post->published_at
@@ -87,15 +91,12 @@ class PostController extends Controller
 
     public function like(Request $request)
     {
-        switch($request->status==='like')
-        {
-            case 'like':
-                //add a like
-                break;
-            case 'dislike':
-                //add a dislike
-                break;
-        }
+        $data['user_id'] = Auth::id();
+        $data['post_id'] = $request->post;
+        $data['status'] = $request->status;
+        dd($data);
+        Likes::create($data);
+        alert('submitted');
     }
 
     private function makeUniqueSlug($title) {
