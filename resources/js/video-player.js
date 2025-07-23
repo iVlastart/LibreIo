@@ -95,6 +95,9 @@ video.addEventListener('timeupdate', ()=>{
 //timelineContainer.addEventListener('mousemove', timelineUpdate);
 //timelineContainer.addEventListener('mousedown', toggleScrubbing);
 
+//like dislike a post
+
+
 //view mods
 function togglePlay()
 {

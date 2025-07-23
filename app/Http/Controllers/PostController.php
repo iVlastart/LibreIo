@@ -85,6 +85,11 @@ class PostController extends Controller
         //
     }
 
+    public function like(Request $request)
+    {
+        
+    }
+
     private function makeUniqueSlug($title) {
         $slug = Str::slug($title);
         $originalSlug = $slug;

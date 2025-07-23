@@ -14,9 +14,15 @@ Route::get('/home', function () {
 
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
 
+//create a post
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
+});
+
+//like dislike a post
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::post('/like', [PostController::class, 'like']);
 });
 
 Route::get('/profile/{username}', [ProfileController::class, 'openProfile'])->name('profile.home');
