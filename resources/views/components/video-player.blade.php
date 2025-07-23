@@ -1,5 +1,5 @@
 @props(['src'=>null])
-<div class="video-container paused" data-volume-level="low">
+<div class="video-container aspect-video paused" data-volume-level="low">
         <div class="video-controls-container">
             <div class="timeline-container">
                 <div class="timeline">
@@ -60,5 +60,5 @@
                 </button>
             </div>
         </div>
-    <video src="{{ asset("/storage/$src") }}" class="w-[100%]"></video>
+    <video src="{{ asset("/storage/$src") }}" class="w-full h-full object-contain"></video>
 </div>

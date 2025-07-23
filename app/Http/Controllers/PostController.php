@@ -56,7 +56,8 @@ class PostController extends Controller
         $post = DB::table('posts')->where('slug',$id)->get()->first();
         return view('post.home')->with([
             'title' => $post->title,
-            'src'=>$post->src
+            'src'=>$post->src,
+            'date'=>$post->published_at
         ]);
     }
 

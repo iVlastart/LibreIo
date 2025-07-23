@@ -81,11 +81,16 @@ video.addEventListener('enterpictureinpicture', ()=>container.classList.add('min
 video.addEventListener('leavepictureinpicture', ()=>container.classList.remove('mini-player'));
 
 //duration listeners
-video.addEventListener('loadeddata', ()=>totalTime.textContent=formatDuration(video.duration));
+video.addEventListener('loadedmetadata', ()=>{
+    if (video.duration && isFinite(video.duration)) {
+        totalTime.textContent = formatDuration(video.duration);
+    }
+});
 video.addEventListener('timeupdate', ()=>{
+    if (video.duration && isFinite(video.duration)) {
     currentTime.textContent = formatDuration(video.currentTime);
     const percentage = video.currentTime / video.duration;
-    timelineContainer.style.setProperty('--progress-position', percentage);
+    timelineContainer.style.setProperty('--progress-position', percentage);}
 });
 //timelineContainer.addEventListener('mousemove', timelineUpdate);
 //timelineContainer.addEventListener('mousedown', toggleScrubbing);
@@ -122,12 +127,12 @@ function toggleMute()
 }
 
 //duration
-
-function formatDuration(t)
-{
-    const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
+const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
         minimumIntegerDigits: 2
     });
+function formatDuration(t)
+{
+    
     const s = Math.floor(t%60);
     const m = Math.floor(t/60)%60;
     const h = Math.floor(t/3600);
