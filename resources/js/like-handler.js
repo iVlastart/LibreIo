@@ -15,8 +15,13 @@ $(() => {
             url: '/like',
             data: data,
             success: ()=>{
+                const el = document.querySelector('.like-count');
+                let count = parseInt(el.textContent, 10) || 0;
+                el.classList.contains("liked") ? count-- : count++;
+                el.classList.toggle('liked');
                 const svg = $(this).find('svg path');
                 svg.attr('fill', svg.attr('fill') === 'currentColor' ? 'white' : 'currentColor');
+                el.textContent = count;
             }
         });
     });
