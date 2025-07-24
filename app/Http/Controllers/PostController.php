@@ -65,14 +65,17 @@ class PostController extends Controller
                         ->where('post_id', $post->id)
                         ->where('status', 'dislike')
                         ->first();
-        
+        $likeCount = Likes::where('post_id', $post->id)->where('status', 'like')->count();
+        $dislikeCount = Likes::where('post_id', $post->id)->where('status', 'dislike')->count();
         return view('post.home')->with([
             'id'=>$post->id,
             'title' => $post->title,
             'src'=>$post->src,
             'date'=>$post->published_at,
             'isLiked'=>$isLiked,
-            'isDisliked'=>$isDisliked
+            'isDisliked'=>$isDisliked,
+            'likeCount'=>$likeCount,
+            'dislikeCount'=>$dislikeCount
         ]);
     }
 
