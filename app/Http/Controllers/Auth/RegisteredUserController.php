@@ -35,6 +35,10 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        if(User::where('name', $request->name)->first()!==null)
+        {
+            return back()->withErrors(['name' => 'User with this name already exists.']);
+        }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

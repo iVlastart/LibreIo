@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,8 +60,15 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function openProfile($username)
+    public function show($username)
     {
-        return view('profile.home', ['username' => $username]);
+        $user = User::where('name', $username)->first();
+        $videosCount = Post::where('user_id', $user->id)->count();
+        return view('profile.home', [
+                        'videosCount' => $videosCount,
+                        'username' => $username,
+                        'followersCount' => $user->followers,
+                        'followingCount' => $user->following,
+                    ]);
     }
 }

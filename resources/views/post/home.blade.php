@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$title}}</title>
     <!-- Scripts -->
-    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js'])
+    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js', 'resources/js/date-handler.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -18,6 +18,10 @@
             <x-like-form :id="$id" :isLiked="$isLiked"
                     :likeCount="$likeCount" :isDisliked="$isDisliked"
                     :dislikeCount="$dislikeCount"/>
+
+            <div class="date">
+                {{ $date }}
+            </div>
         </div>
     </x-app-layout>
 </body>
