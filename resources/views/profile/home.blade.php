@@ -15,11 +15,11 @@
                         <p class="text-gray-400">Videos</p>
                     </div>
                     <div>           
-                        <p class="font-bold text-gray-700 text-xl">10</p>
+                        <p class="font-bold text-gray-700 text-xl">{{$followersCount}}</p>
                         <p class="text-gray-400">Followers</p>
                     </div>
                     <div>           
-                        <p class="font-bold text-gray-700 text-xl">89</p>
+                        <p class="font-bold text-gray-700 text-xl">{{$followingCount}}</p>
                         <p class="text-gray-400">Following</p>
                     </div>
                 </div>
@@ -28,12 +28,19 @@
                             absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">  
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                            </svg>      
+                            </svg>    
                         </div>    
                     </div>    
                     <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
-                        <button  class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow 
-                                hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">Follow</button>
+                        @if(Auth::user()->name===$username)
+                            <a href="{{ route('profile.edit') }}" class="text-black py-4 px-4 uppercase rounded bg-white border border-black hover:bg-slate-100
+                                    shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 cursor-pointer">Edit</a>                            
+                        @else
+                            <button  class="text-white py-2 px-4 uppercase rounded bg-blue-400 hover:bg-blue-500 shadow 
+                                    hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
+                                Follow
+                            </button>
+                        @endif
                             
                         {{-- donate btn (future updates) --}}
                         {{--<button  class="text-white py-2 px-4 uppercase rounded bg-gray-700 hover:bg-gray-800 shadow hover:shadow-lg 
@@ -48,6 +55,7 @@
                 </div>  
                 <div class="mt-12 flex flex-col justify-center">    
                     <p class="text-gray-600 text-center font-light lg:px-16">
+                        {{ $bio }}
                     </p>    
                   
                 </div>
