@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,11 @@ Route::middleware(['auth', 'verified'])->group(function(){
 //like dislike a post
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/like', [PostController::class, 'like'])->name('post.like');
+});
+
+//follow a person
+Route::middleware(['auth', 'verified'])->group(function (){
+    Route::post('/follow', [FollowController::class, 'follow'])->name('profile.follow');
 });
 
 Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.home');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Follow;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -64,13 +65,15 @@ class ProfileController extends Controller
     public function show($username)
     {
         $user = User::where('name', $username)->first();
+        $authUser = User::where('name', Auth::user()->name)->first();
         $videosCount = Post::where('user_id', $user->id)->count();
         return view('profile.home', [
                         'videosCount' => $videosCount,
                         'username' => $username,
-                        'followersCount' => $user->followers,
-                        'followingCount' => $user->following,
-                        'bio' => $user->bio
+                        'followersCount' => Follow::where('followed_id', $user->id)->count(),
+                        'followingCount' => Follow::where('follower_id', $user->id)->count(),
+                        'bio' => $user->bio,
+                        'isFollowed'=>Follow::where('follower_id', $authUser->id)->first()!==null,
                     ]);
     }
 }
