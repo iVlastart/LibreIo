@@ -67,6 +67,7 @@ class ProfileController extends Controller
         $user = User::where('name', $username)->first();
         $authUser = User::where('name', Auth::user()->name)->first();
         $videosCount = Post::where('user_id', $user->id)->count();
+        $videos = Post::where('user_id', $user->id)->get();
         return view('profile.home', [
                         'videosCount' => $videosCount,
                         'username' => $username,
@@ -74,6 +75,7 @@ class ProfileController extends Controller
                         'followingCount' => Follow::where('follower_id', $user->id)->count(),
                         'bio' => $user->bio,
                         'isFollowed'=>Follow::where('follower_id', $authUser->id)->first()!==null,
+                        'videos'=>$videos
                     ]);
     }
 }

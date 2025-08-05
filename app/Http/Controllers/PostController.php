@@ -42,7 +42,7 @@ class PostController extends Controller
         ]);
         $file = $data['src'];
         unset($data['src']);
-        $data['src'] = $file->store('uploads', 'public');
+        $data['src'] = $file->store('uploads/'.$data['title'], 'public');
         $data['thumbnail'] = 'thumbnail'; //this will contain the thumbnail in the future
         $data['user_id'] = Auth::id();
         $data['slug'] = $this->makeUniqueSlug($data['title']);
