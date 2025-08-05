@@ -1,6 +1,7 @@
-@props(['src' => null, 'title' => null, 'views'=>0])
+@props(['src'=>null, 'title' => null, 'views'=>0, 'slug'=>null])
 
-<div class="grid grid-cols-3 grid-rows-[auto_auto_auto_auto] hover:cursor-pointer border border-black w-fit h-fit mr-2">
+<div class="preview-container grid grid-cols-3 grid-rows-[auto_auto_auto_auto] hover:cursor-pointer border border-black w-fit h-fit mr-2"
+        data-slug="{{ $slug }}">
     <header class="col-span-3 row-span-2">
         <img src="{{ $src }}" 
              class="w-full h-auto max-h-96 object-cover" 
@@ -17,3 +18,17 @@
         time
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        document.querySelectorAll('.preview-container').forEach(element=>{
+            const slug = element.dataset.slug;
+            if(slug)
+            {
+                element.addEventListener('click', ()=>{
+                    location.assign('/watch/'+slug);
+                });
+            }
+        });
+    });
+</script>

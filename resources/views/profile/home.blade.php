@@ -69,7 +69,7 @@
                 <div class="mt-5 flex">
                     @foreach ($videos as $video)
                         <x-video-preview src="https://img-cdn.heureka.group/v1/9bee8c48-1403-5575-acd9-d8ad5f030cb9.jpg"
-                        title="{{ $video->title }}" views="100"/>
+                        title="{{ $video->title }}" views="100" slug="{{ $video->slug }}"/>
                     @endforeach
                 </div>
             </div>
