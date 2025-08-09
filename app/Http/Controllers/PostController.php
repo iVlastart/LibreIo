@@ -39,14 +39,46 @@ class PostController extends Controller
             'title'=>'required',
             'descr'=>'required',
             "visibility"=>'required',
+            'thumbnail'=>['nullable', 'mimes:jpg,jpeg,png,webp']
         ]);
+        $data['slug'] = $this->makeUniqueSlug($data['title']);
         $file = $data['src'];
         unset($data['src']);
-        $data['src'] = $file->store('uploads/'.$data['title'], 'public');
-        $data['thumbnail'] = 'thumbnail'; //this will contain the thumbnail in the future
+
+        $path = $file->store('uploads/'.$data['slug'], 'public');
+        $filename = basename($path);
+
+        $thumbnail = $request->file('thumbnail');
+
+        if($thumbnail)
+        {
+            //thumbnail was provided
+            $imgPath = $thumbnail->store(
+                'uploads/'.$data['title'],
+                'public'
+            );
+            $data['thumbnail'] = $imgPath;
+        }
+        else
+        {
+            //thumbnail was not provided thus thumbnail will be the 1st frame
+            $vidPath = storage_path('app/public/uploads/' . $data['slug']. '/'.$filename);
+            $imgPath = storage_path('app/public/uploads/' . $data['slug'].'/'.$data['slug'].'-preview.webp');
+            exec('ffmpeg -i '.escapeshellarg($vidPath).' -vframes 1 -q:v 90 '.escapeshellarg($imgPath).'.webp 2>&1');
+            $data['thumbnail'] = $imgPath;
+        }
+        
+
+
+        
+        
+        
+
+        $data['src'] = $path;
         $data['user_id'] = Auth::id();
-        $data['slug'] = $this->makeUniqueSlug($data['title']);
+        
         $data['published_at'] = now();
+
         Post::create($data);
         return redirect()->route('profile.home', ['username' => Auth::user()->name]);
     }

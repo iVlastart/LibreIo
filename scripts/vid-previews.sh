@@ -1,0 +1,1 @@
+ffmpeg -i $1 -vframes 1 -q:v 90 thumbnail.webp

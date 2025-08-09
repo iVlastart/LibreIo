@@ -25,6 +25,15 @@
                                     <p class="mt-1 text-sm text-gray-500" id="file_input_help">MP4 (MAX. 40MB).</p>
                                     <x-input-error :messages="$errors->get('src')" class="mt-2"/>
                                 </div>
+
+                                <div class="mt-4">
+                                    <label class="block mb-2 text-sm font-medium text-gray-900" for="file_input">Upload thumbnail</label>
+                                    <input name="thumbnail" class="block w-full text-sm text-gray-900 border 
+                                            border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
+                                            id="img_input" type="file">
+                                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">JPG, JPEG, PNG, WEBP</p>
+                                    <x-input-error :messages="$errors->get('thumbnail')" class="mt-2"/>
+                                </div>
                                 
                                 
                                 <div class="mt-4">
