@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$username}}</title>
     <!-- Scripts -->
-    @vite(['resources/js/follow-handler.js'])
+    @vite(['resources/js/follow-handler.js', 'resources/js/date-handler.js'])
 </head>
 <body>
     <x-app-layout>
@@ -69,7 +69,8 @@
                 <div class="mt-5 flex">
                     @foreach ($videos as $video)
                         <x-video-preview src="{{ $video->thumbnail }}"
-                            title="{{ $video->title }}" views="100" slug="{{ $video->slug }}"/>
+                            title="{{ $video->title }}" views="100" slug="{{ $video->slug }}"
+                            date="{{ $video->published_at }}"/>
                     @endforeach
                 </div>
             </div>
