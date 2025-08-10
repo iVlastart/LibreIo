@@ -1,13 +1,15 @@
 @props(['src'=>null, 'title' => null, 'views'=>0, 'slug'=>null, 'date'=>null])
 
 <div class="preview-container grid grid-cols-3 grid-rows-[auto_auto_auto_auto] border 
-            border-black w-fit h-fit mr-2 hover:cursor-pointer"\
+            border-black w-fit h-fit mr-2 hover:cursor-pointer"
         data-slug="{{ $slug }}">
     <script src=""></script>
     <header class="col-span-3 row-span-2">
-        <img src="{{ asset("/storage/$src") }}" 
-             class="w-full h-auto object-fill aspect-video max-h-60 max-w-80" 
-             onerror="alert('there was an error loading the img')" />
+        <div class="w-80 h-60 bg-black flex items-center justify-center">
+            <img src="{{ asset("/storage/$src") }}" 
+                class="w-full h-full object-contain" 
+                onerror="alert('there was an error loading the img')" />
+        </div>
     </header>
     
     <main class="col-span-3 font-bold row-start-3 text-2xl border border-black h-fit">
