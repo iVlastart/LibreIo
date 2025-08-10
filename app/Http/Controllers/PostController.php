@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use \Illuminate\Support\Str;
 
 use function Laravel\Prompts\alert;
@@ -54,7 +55,7 @@ class PostController extends Controller
         {
             //thumbnail was provided
             $imgPath = $thumbnail->store(
-                'uploads/'.$data['title'],
+                'uploads/'.$data['slug'],
                 'public'
             );
             $data['thumbnail'] = $imgPath;
@@ -62,10 +63,11 @@ class PostController extends Controller
         else
         {
             //thumbnail was not provided thus thumbnail will be the 1st frame
+            $output = [];
             $vidPath = storage_path('app/public/uploads/' . $data['slug']. '/'.$filename);
             $imgPath = storage_path('app/public/uploads/' . $data['slug'].'/'.$data['slug'].'-preview.webp');
-            exec('ffmpeg -i '.escapeshellarg($vidPath).' -vframes 1 -q:v 90 '.escapeshellarg($imgPath).'.webp 2>&1');
-            $data['thumbnail'] = $imgPath;
+            exec('ffmpeg -i '.escapeshellarg($vidPath).' -vframes 1 -q:v 90 '.escapeshellarg($imgPath).' 2>&1', $output);
+            $data['thumbnail'] = 'uploads/' . $data['slug'].'/'.$data['slug'].'-preview.webp';
         }
         
 

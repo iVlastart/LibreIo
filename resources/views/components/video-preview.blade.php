@@ -3,8 +3,8 @@
 <div class="preview-container grid grid-cols-3 grid-rows-[auto_auto_auto_auto] hover:cursor-pointer border border-black w-fit h-fit mr-2"
         data-slug="{{ $slug }}">
     <header class="col-span-3 row-span-2">
-        <img src="{{ $src }}" 
-             class="w-full h-auto max-h-96 object-cover" 
+        <img src="{{ asset("/storage/$src") }}" 
+             class="w-full h-auto object-fill aspect-video max-h-60 max-w-80" 
              onerror="alert('there was an error loading the img')" />
     </header>
     
