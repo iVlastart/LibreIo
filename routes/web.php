@@ -3,14 +3,23 @@
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', function () {
-    return view('home');
+Route::get('/home', function (Request $request) {
+    $posts = Post::paginate(10)->where('visibility', 'public');
+    
+    if($request->ajax())
+    {
+        return view('home', compact('posts'))->render();
+    }
+
+    return view('home', compact('posts'));
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
