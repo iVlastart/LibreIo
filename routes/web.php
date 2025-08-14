@@ -31,7 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function (){
     Route::post('/follow', [FollowController::class, 'follow'])->name('profile.follow');
 });
 
-Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.home');
+Route::get('/profile/{username}/{action?}', [ProfileController::class, 'show'])->name('profile.home');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

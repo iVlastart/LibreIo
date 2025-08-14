@@ -62,15 +62,24 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
-    public function show($username)
+    public function show($username, $action = "")
     {
         $user = User::where('name', $username)->first();
         $authUser = User::where('name', Auth::user()->name)->first();
         $videosCount = Post::where('user_id', $user->id)->count();
-        $videos = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->get();
+        switch($action)
+        {
+            case "private":
+                $videos = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'private')->get();
+                break;
+            default:
+                $videos = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->get();
+                break;
+        }
         return view('profile.home', [
                         'videosCount' => $videosCount,
                         'username' => $username,
+                        'action' => $action,
                         'followersCount' => Follow::where('followed_id', $user->id)->count(),
                         'followingCount' => Follow::where('follower_id', $user->id)->count(),
                         'bio' => $user->bio,

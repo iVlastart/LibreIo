@@ -1,41 +1,22 @@
-document.querySelectorAll('.date').forEach(dateDiv=>{
-    const vidDate = dateDiv.textContent.trim();
-    console.log(vidDate);
+document.querySelectorAll('.date').forEach(dateDiv => {
+    const vidDateStr = dateDiv.textContent.trim();
+    const vidDate = new Date(vidDateStr.replace(" ", "T"));
+    const now = new Date();
 
-    //get current dates
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth()+1;
-    const day = date.getDate();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
+    const diffMs = now - vidDate;
+    const diffMins = Math.floor(diffMs / (1000 * 60));
+    const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffDays / 365);
 
-    const [datePart, timePart] = vidDate.split(" ");
-    const [vidYear, vidMonth, vidDay] = datePart.split("-").map(num => parseInt(num, 10));
-    const [vidHours, vidMinutes] = timePart.split(":").map(num => parseInt(num, 10));
+    let label = "";
+    if (diffMins < 1) label = "just now";
+    else if (diffMins < 60) label = `${diffMins} mins ago`;
+    else if (diffHours < 24) label = `${diffHours} hours ago`;
+    else if (diffDays < 30) label = `${diffDays} days ago`;
+    else if (diffMonths < 12) label = `${diffMonths} months ago`;
+    else label = `${diffYears} years ago`;
 
-    if(vidYear===year&&month===vidMonth&&day===vidDay&&hours===vidHours)
-    {
-        dateDiv.innerText = minutes-vidMinutes+" mins ago";
-    }
-
-    else if(vidYear===year&&month===vidMonth&&day===vidDay)
-    {
-        dateDiv.innerText = hours-vidHours+" hours ago";
-    }
-
-    else if(vidYear===year&&month===vidMonth)
-    {
-        dateDiv.innerText = day-vidDay+" days ago";
-    }
-
-    else if(vidYear===year)
-    {
-        dateDiv.innerText = month-vidMonth+" months ago";
-    }
-
-    else
-    {
-        dateDiv.innerText = year-vidYear+" years ago";
-    }
+    dateDiv.innerText = label;
 });
