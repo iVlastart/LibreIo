@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Likes;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -91,6 +92,12 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = DB::table('posts')->where('slug',$id)->get()->first();
+        $user = DB::table('users')->where('id', $post->user_id)->get()->first();
+        if($post->visibility==='private'
+            && Auth::user()->name!==$user->name)
+        {
+            return redirect('home');
+        }
         $isLiked = Likes::where('user_id', Auth::id())
                         ->where('post_id', $post->id)
                         ->where('status', 'like')
