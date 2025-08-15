@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>LibreIo</title>
+        <title>LibreIo / Welcome</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -19,21 +19,21 @@
             </style>
         @endif
     </head>
-    <body class="bg-[#FDFDFC] dark:bg-[#0a0a0a] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
+    <body class="bg-[#FDFDFC] text-[#1b1b18] flex p-6 lg:p-8 items-center lg:justify-center min-h-screen flex-col">
         <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
             @if (Route::has('login'))
                 <nav class="flex items-center justify-end gap-4">
                     @auth
                         <a
                             href="{{ url('/home') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+                            class="inline-block px-5 py-1.5 border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] rounded-sm text-sm leading-normal"
                         >
                             Home
                         </a>
                     @else
                         <a
                             href="{{ route('login') }}"
-                            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] text-[#1b1b18] border border-transparent hover:border-[#19140035] dark:hover:border-[#3E3E3A] rounded-sm text-sm leading-normal"
+                            class="inline-block px-5 py-1.5 text-[#1b1b18] border border-transparent hover:border-[#19140035] rounded-sm text-sm leading-normal"
                         >
                             Log in
                         </a>
@@ -41,7 +41,7 @@
                         @if (Route::has('register'))
                             <a
                                 href="{{ route('register') }}"
-                                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal">
+                                class="inline-block px-5 py-1.5 border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] rounded-sm text-sm leading-normal">
                                 Register
                             </a>
                         @endif
@@ -49,12 +49,64 @@
                 </nav>
             @endif
         </header>
-        <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
-            <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
-                
-            </main>
-        </div>
+        <main class="w-full">
+            <section class="relative">
+                <div class="container flex flex-col-reverse lg:flex-row items-center gap-12 mt-14 lg:mt-28">
+                    <div class="flex flex-1 flex-col items-center lg:items-start">
+                        <h2 class="text-blue-500 text-3xl md:text-4 lg:text-5xl text-center lg:text-left mb-6">
+                            A simple video sharing app
+                        </h2>
+                        <p class="text-gray-500 text-lg text-center lg:text-left mb-6">
+                            A clean and simple app where you can upload a video and share it with others
+                        </p>
+                    </div>
+                    <div class="flex justify-center flex-1 mb-10 md:mb-16 lg:mb-0 z-10">
+                        <img src="{{ asset('imgs/hero-bg.webp') }}"
+                                class="w-5/6 h-5/6 sm:h-3/4 md:w-full md:h-full">
+                    </div>
+                </div>
+            </section>
 
+            <section class="bg-gray-100 py-20 mt-20 lg:mt-60">
+                <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+                    <h1 class="text-3xl text-center text-blue-500">
+                        Features
+                    </h1>
+                    <p class="text-center text-gray-500 mt-4">
+                        Our aim is to make it quick and simple for you to manage your videos
+                    </p>
+                </div>
+                @include('welcome.partials.feature', ['title'=>'Ads', 
+                    'desc'=>'Watch with no ads for free',
+                    'reverse'=>false, 
+                    'src'=>asset('imgs/feature1.png')])
+                @include('welcome.partials.feature', ['title'=>'Find your videos quicker', 
+                    'desc'=>'The video url is generated based on the video title',
+                    'reverse'=>true,
+                    'src'=>asset('imgs/feature2.webp')])
+            </section>
+
+            <section class="bg-white">
+                <div class="container">
+                    <div class="sm:w-3/4 lg:w-5/12 mx-auto px-2">
+                        <h1 class="text-3xl text-center text-blue-500">Frequently Asked Questions</h1>
+                        <p class="text-gray-500 text-center mt-4">
+                            Here are some of our FAQs. Should you have any other questions, feel free to contact us.
+                        </p>
+                    </div>
+                    <div class="flex flex-col sm:w-3/4 lg:w-5/12 mt-12 mx-auto">
+                        <div class="flex items-center border-b py-4">
+                            <span class="flex-1">
+                                What is LiberIo                                
+                            </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>
         @endif

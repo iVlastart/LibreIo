@@ -12,12 +12,10 @@
                 <div class="p-6 text-gray-900">
                      <div id="posts-container" class="mt-5 grid gap-4 
                             grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        @include('home.partials.posts', ['posts' => $posts])
+                        @include('partials.posts', ['posts' => $posts])
                     </div>
                 </div>
-                <div id="loading" class="w-full flex row justify-center">
-                    <div id="spinner"></div>
-                </div>
+                @include('partials.spinner')
             </div>
         </div>
     </div>

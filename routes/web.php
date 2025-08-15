@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome.welcome');
 });
 
 Route::get('/home', function (Request $request) {
@@ -16,7 +16,7 @@ Route::get('/home', function (Request $request) {
     
     if($request->ajax())
     {
-        return view('home.partials.posts', compact('posts'))->render();
+        return view('partials.posts', compact('posts'))->render();
     }
 
     return view('home.home', compact('posts'));
