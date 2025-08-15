@@ -12,7 +12,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function (Request $request) {
-    $posts = Post::paginate(10)->where('visibility', 'public');
+    $posts = Post::where('visibility', 'public')->inRandomOrder()->paginate(12);
     
     if($request->ajax())
     {
