@@ -1,7 +1,7 @@
-@vite(['resources/js/date-handler.js', 'resources/js/infiniteScroll.js'])
+@vite(['resources/js/date-handler.js', 'resources/js/infiniteScroll.js', 'resources/css/loader.css'])
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 id="Title" class="font-semibold text-xl text-gray-800 leading-tight hover:cursor-pointer w-fit">
             LibreIo
         </h2>
     </x-slot>
@@ -19,8 +19,8 @@
                         @endforeach
                     </div>
                 </div>
-                <div id="loading" style="display: none; text-align: center; margin: 20px;">
-                    Loading...
+                <div id="loading" class="w-full flex row justify-center">
+                    <div id="spinner"></div>
                 </div>
             </div>
         </div>

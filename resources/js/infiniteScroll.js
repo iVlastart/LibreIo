@@ -1,12 +1,16 @@
 import $ from 'jquery';
 let page = 1;
 
+$('#Title').click(()=>{
+    location.reload()
+})
 $(window).scroll(function()
 {
     if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) 
     {
         page++;
-        loadMoreData(page);
+        if(morePosts) loadMoreData(page);
+        else $('#loading').hide();
     }
 });
 
@@ -20,6 +24,7 @@ function loadMoreData(page)
             if(data.trim().length == 0)
             {
                 $('#loading').html("No more posts");
+                morePosts = false;
                 return;
             }
             $('#loading').hide();
