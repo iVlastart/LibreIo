@@ -1,9 +1,9 @@
 import $ from 'jquery';
 let page = 1;
+let morePosts = true;
+let isLoading = false;
 
-$('#Title').click(()=>{
-    location.reload()
-})
+$('#Title').on('click',()=>location.reload())
 $(window).scroll(function()
 {
     if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) 
@@ -16,10 +16,12 @@ $(window).scroll(function()
 
 function loadMoreData(page)
 {
+    if(isLoading) return;
+    isLoading = true;
     $('#loading').show();
     $.ajax({
         type: 'GET',
-        url: '?page='+page,
+        url: '/home?page='+page,
         success: function(data){
             if(data.trim().length == 0)
             {
@@ -28,7 +30,13 @@ function loadMoreData(page)
                 return;
             }
             $('#loading').hide();
-            $("#post-data").append(data);
+            $("#posts-container").append(data);
         },
+        complete: function(){
+            isLoading = false;
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX error:", xhr.responseText);
+        }
     });
 }

@@ -12,11 +12,7 @@
                 <div class="p-6 text-gray-900">
                      <div id="posts-container" class="mt-5 grid gap-4 
                             grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                        @foreach ($posts as $video)
-                            <x-video-preview src="{{ $video->thumbnail }}"
-                            title="{{ $video->title }}" views="100" slug="{{ $video->slug }}"
-                            date="{{ $video->published_at }}"/>
-                        @endforeach
+                        @include('home.partials.posts', ['posts' => $posts])
                     </div>
                 </div>
                 <div id="loading" class="w-full flex row justify-center">

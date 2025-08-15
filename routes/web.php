@@ -16,10 +16,10 @@ Route::get('/home', function (Request $request) {
     
     if($request->ajax())
     {
-        return view('home', compact('posts'))->render();
+        return view('home.partials.posts', compact('posts'))->render();
     }
 
-    return view('home', compact('posts'));
+    return view('home.home', compact('posts'));
 })->middleware(['auth', 'verified'])->name('home');
 
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
