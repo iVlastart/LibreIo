@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$username}}</title>
     <!-- Scripts -->
-    @vite(['resources/js/follow-handler.js', 'resources/js/infiniteScroll.js', 'resources/js/date-handler.js'])
+    @vite(['resources/js/infiniteScroll.js', 'resources/js/date-handler.js'])
 </head>
 <body>
     <x-app-layout>
@@ -33,15 +33,7 @@
                             <a href="{{ route('profile.edit') }}" class="text-black py-4 px-4 uppercase rounded bg-white border border-black hover:bg-slate-100
                                     shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 cursor-pointer">Edit</a>                            
                         @else
-                            <form action="{{ route('profile.follow') }}" method="post" class="follow-form">
-                                @csrf
-                                <input type="hidden" name="name" value="{{ $username }}">
-                                <button type="submit" class="{{ $isFollowed ? "text-black" : "text-white" }} py-2 px-4 uppercase rounded 
-                                        {{ $isFollowed ? "bg-white border border-black" : "bg-blue-400" }} hover:{{ $isFollowed ? "bg-slate-100" : "bg-blue-500" }} shadow 
-                                        hover:shadow-lg font-medium transition transform hover:-translate-y-0.5">
-                                    {{ $isFollowed ? 'Following' : 'Follow' }}
-                                </button>
-                            </form>
+                            @include('profile.partials.follow', ['isFollowed'=>$isFollowed])
                         @endif
                             
                         {{-- donate btn (future updates) --}}

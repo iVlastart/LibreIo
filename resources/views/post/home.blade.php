@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$title}}</title>
     <!-- Scripts -->
-    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js', 'resources/js/date-handler.js'])
+    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js', 'resources/js/date-handler.js', 'resources/js/number-handler.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -38,7 +38,37 @@
                 </p>
                 <p class="text-gray-500 text-sm md:text-base">{{ $followers }} {{ $followers===1 ? 'follower' : 'followers' }}</p>
             </div>
+            <div class="mx-auto">
+                @if(Auth::user()->name!==$username)
+                    @include('profile.partials.follow', ['isFollowed'=>$isFollowed])
+                @endif
+            </div>
+        </section>
 
+        {{-- description --}}
+        <section class="container shadow sm sm:rounded-lg pl-1 md:pl-72">
+            <div class="flex flex-row gap-6 text-base md:text-xl">
+                <div><span class="number">100</span> views</div>
+                <div class="date md:mx-auto">
+                    {{ $date }}
+                </div>
+            </div>
+            <div class="container pt-5">
+                <h1 class="text-xl md:text-2xl">
+                    Description
+                </h1>
+                <p class="text-base pt-2">
+                    <div class="shrink-0">
+                        <div class="py-4">
+                            <div class="max-w-4xl mx-auto sm:px-6:lg-px-8">
+                                <div class="overflow-hidden shadow sm sm:rounded-lg p-1 flex gap-4 items-start">
+                                    {{ $description }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </p>
+            </div>
         </section>
     </x-app-layout>
 </body>

@@ -5,7 +5,7 @@
         <div class="max-w-4xl mx-auto sm:px-6:lg-px-8">
             <div class="overflow-hidden shadow sm sm:rounded-lg p-1 flex gap-4 items-start">
                 {{-- like --}}
-                <form method="post" action="/like" class="like-form">
+                <form method="post" action="/like" class="like-form" title="like">
                     @csrf
                     <input type="hidden" name="status" value="like">
                     <input type="hidden" name="post_id" value="{{ $id }}">
@@ -20,7 +20,7 @@
                 </form>
                 {{-- divider --}}
                 <div class="w-px h-8 bg-black"></div>
-                <form action="/like" method="post" class="dislike-form">
+                <form action="/like" method="post" class="dislike-form" title="dislike">
                     @csrf
                     <input type="hidden" name="status" value="dislike">
                     <input type="hidden" name="post_id" value="{{ $id }}">

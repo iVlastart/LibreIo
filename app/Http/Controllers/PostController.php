@@ -113,6 +113,7 @@ class PostController extends Controller
         return view('post.home')->with([
             'id'=>$post->id,
             'title' => $post->title,
+            'description'=>$post->descr,
             'src'=>$post->src,
             'date'=>$post->published_at,
             'isLiked'=>$isLiked,
@@ -120,7 +121,8 @@ class PostController extends Controller
             'likeCount'=>$likeCount,
             'dislikeCount'=>$dislikeCount,
             'username'=>$user->name,
-            'followers'=>$followers
+            'followers'=>$followers,
+            'isFollowed'=>Follow::where('follower_id', Auth::id())->first()!==null
         ]);
     }
 
