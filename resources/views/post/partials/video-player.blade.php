@@ -3,9 +3,7 @@
         <div class="video-controls-container">
             <div class="timeline-container">
                 <div class="timeline">
-                    <div class="thumb-indicator">
-                        
-                    </div>
+                    <div class="thumb-indicator"></div>
                 </div>
             </div>
             <div class="controls">
@@ -60,5 +58,5 @@
                 </button>
             </div>
         </div>
-    <video src="{{ asset("/storage/$src") }}" class="w-full h-full object-contain"></video>
+    <video src="{{ asset("/storage/$src") }}" class="w-full h-auto max-w-full rounded-md"></video>
 </div>

@@ -106,6 +106,22 @@
                     </div>
                 </div>
             </section>
+            
+            <section class="bg-purple-500 text-white py-20">
+                <div class="container">
+                    <div class="sm:w-3/4 lg:w-2/4 mx-auto">
+                        <p class="font-light uppercase text-center mb-8">
+                            {{ $usersCount }} already joined
+                        </p>
+                        <h1 class="text-3xl text-center">
+                            Contact Us
+                        </h1>
+                        <div class="flex flex-col sm:flex-row gap-6 mt-8">
+                            <p class="text-center w-full">email: contact@libreio.com</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
         @if (Route::has('login'))
             <div class="h-14.5 hidden lg:block"></div>

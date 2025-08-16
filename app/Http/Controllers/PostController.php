@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follow;
 use App\Models\Likes;
 use App\Models\Post;
 use App\Models\User;
@@ -108,6 +109,7 @@ class PostController extends Controller
                         ->first();
         $likeCount = Likes::where('post_id', $post->id)->where('status', 'like')->count();
         $dislikeCount = Likes::where('post_id', $post->id)->where('status', 'dislike')->count();
+        $followers = Follow::where('followed_id', $user->id)->count();
         return view('post.home')->with([
             'id'=>$post->id,
             'title' => $post->title,
@@ -116,7 +118,9 @@ class PostController extends Controller
             'isLiked'=>$isLiked,
             'isDisliked'=>$isDisliked,
             'likeCount'=>$likeCount,
-            'dislikeCount'=>$dislikeCount
+            'dislikeCount'=>$dislikeCount,
+            'username'=>$user->name,
+            'followers'=>$followers
         ]);
     }
 

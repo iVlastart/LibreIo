@@ -4,11 +4,13 @@ use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome.welcome');
+    $usersCount = User::count();
+    return view('welcome.welcome')->with(['usersCount'=>$usersCount]);
 });
 
 Route::get('/home', function (Request $request) {

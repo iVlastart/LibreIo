@@ -64,17 +64,22 @@ class ProfileController extends Controller
 
     public function show($username, $action = "")
     {
+        $request = new Request();
         $user = User::where('name', $username)->first();
         $authUser = User::where('name', Auth::user()->name)->first();
         $videosCount = Post::where('user_id', $user->id)->count();
         switch($action)
         {
             case "private":
-                $videos = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'private')->get();
+                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'private')->paginate(8);
                 break;
             default:
-                $videos = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->get();
+                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(8);
                 break;
+        }
+        if($request->ajax())
+        {
+            return view('partials.posts', compact('posts'))->render();
         }
         return view('profile.home', [
                         'videosCount' => $videosCount,
@@ -84,7 +89,7 @@ class ProfileController extends Controller
                         'followingCount' => Follow::where('follower_id', $user->id)->count(),
                         'bio' => $user->bio,
                         'isFollowed'=>Follow::where('follower_id', $authUser->id)->first()!==null,
-                        'videos'=>$videos
+                        'posts'=>$posts
                     ]);
     }
 }

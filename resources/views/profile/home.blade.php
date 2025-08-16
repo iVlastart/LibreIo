@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$username}}</title>
     <!-- Scripts -->
-    @vite(['resources/js/follow-handler.js', 'resources/js/date-handler.js'])
+    @vite(['resources/js/follow-handler.js', 'resources/js/infiniteScroll.js', 'resources/js/date-handler.js'])
 </head>
 <body>
     <x-app-layout>
@@ -25,13 +25,8 @@
                         <p class="text-gray-400">Following</p>
                     </div>
                 </div>
-                <div class="relative">
-                    <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl 
-                            absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24" viewBox="0 0 20 20" fill="currentColor">  
-                                <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
-                            </svg>    
-                        </div>    
+                    <div class="relative">
+                        @include('profile.partials.pfp', ['profile'=>true])    
                     </div>    
                     <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
                         @if(Auth::user()->name===$username)
@@ -103,13 +98,18 @@
                     </div>
                   </nav>
                 </div>
-                <div class="mt-5 grid gap-4 
-                        grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-                    @foreach ($videos as $video)
-                        <x-video-preview src="{{ $video->thumbnail }}"
-                            title="{{ $video->title }}" views="100" slug="{{ $video->slug }}"
-                            date="{{ $video->published_at }}"/>
-                    @endforeach
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                            <div class="p-6 text-gray-900">
+                                <div id="posts-container" class="mt-5 grid gap-4 
+                                        grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                                    @include('partials.posts', ['posts' => $posts])
+                                </div>
+                            </div>
+                            @include('partials.spinner')
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 @props(['id'=>0,'isLiked'=>false, 'likeCount'=>0, 'isDisliked'=>false, 'dislikeCount'=>0])
 
-<div class="ml-96 shrink-0">
+<div class="shrink-0">
     <div class="py-4">
         <div class="max-w-4xl mx-auto sm:px-6:lg-px-8">
             <div class="overflow-hidden shadow sm sm:rounded-lg p-1 flex gap-4 items-start">
