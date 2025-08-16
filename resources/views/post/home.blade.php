@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$title}}</title>
     <!-- Scripts -->
-    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js', 'resources/js/date-handler.js', 'resources/js/number-handler.js'])
+    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js', 'resources/js/date-handler.js', 'resources/js/number-handler.js',
+            'resources/js/save-handler.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -30,7 +31,7 @@
         {{-- uploader --}}
         <section class="flex flex-row items-center pl-1 md:pl-72 mt-10 bg-gray-200">
             <div class="relative w-36 h-36 md:w-48 md:h-48 scale-[0.35] md:scale-[0.5] flex-shrink-0">
-                @include('profile.partials.pfp', ['profile'=>false]) 
+                @include('profile.partials.pfp', ['profile'=>false])
             </div>
             <div class="flex flex-col">
                 <a href="{{ route('profile.home', ['username' => $username]) }}" class="ml-0 md:ml-4 text-2xl md:text-3xl">

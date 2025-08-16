@@ -74,6 +74,9 @@
             <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('post.create')" :active="request()->routeIs('post.create')">
+                {{ __('Create') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
