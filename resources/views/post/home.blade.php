@@ -24,18 +24,18 @@
                     'isLiked'=>$isLiked, 'isDisliked'=>$isDisliked,
                     'likeCount'=>$likeCount, 'dislikeCount'=>$dislikeCount])
             @include('post.partials.save-form')
-            @include('post.partials.download-form')
+            @include('post.partials.download-form', ['src'=>$src])
         </section>
 
         {{-- uploader --}}
-        <section class="flex flex-row items-center pl-1 md:pl-72 mt-10">
+        <section class="flex flex-row items-center pl-1 md:pl-72 mt-10 bg-gray-200">
             <div class="relative w-36 h-36 md:w-48 md:h-48 scale-[0.35] md:scale-[0.5] flex-shrink-0">
                 @include('profile.partials.pfp', ['profile'=>false]) 
             </div>
             <div class="flex flex-col">
-                <p class="ml-0 md:ml-4 text-2xl md:text-3xl">
+                <a href="{{ route('profile.home', ['username' => $username]) }}" class="ml-0 md:ml-4 text-2xl md:text-3xl">
                     {{ $username }}
-                </p>
+                </a>
                 <p class="text-gray-500 text-sm md:text-base">{{ $followers }} {{ $followers===1 ? 'follower' : 'followers' }}</p>
             </div>
             <div class="mx-auto">
@@ -46,23 +46,22 @@
         </section>
 
         {{-- description --}}
-        <section class="container shadow sm sm:rounded-lg pl-1 md:pl-72">
-            <div class="flex flex-row gap-6 text-base md:text-xl">
-                <div><span class="number">100</span> views</div>
-                <div class="date md:mx-auto">
-                    {{ $date }}
-                </div>
-            </div>
-            <div class="container pt-5">
-                <h1 class="text-xl md:text-2xl">
-                    Description
-                </h1>
+        <section class="container shadow sm sm:rounded-lg pl-1 md:pl-32 mt-1">
+            <div class="container pt-8">
                 <p class="text-base pt-2">
                     <div class="shrink-0">
                         <div class="py-4">
                             <div class="max-w-4xl mx-auto sm:px-6:lg-px-8">
-                                <div class="overflow-hidden shadow sm sm:rounded-lg p-1 flex gap-4 items-start">
-                                    {{ $description }}
+                                <div class="overflow-hidden shadow sm sm:rounded-lg p-1 flex flex-col gap-4 items-start">
+                                    <div class="flex flex-row gap-6 text-base md:text-xl">
+                                        <div><span class="number">100</span> views</div>
+                                        <div class="date">
+                                            {{ $date }}
+                                        </div>
+                                    </div>
+                                    <p class="text-base break-words">
+                                        {{ $description }}
+                                    </p>
                                 </div>
                             </div>
                         </div>
