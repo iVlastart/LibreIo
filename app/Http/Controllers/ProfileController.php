@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Follow;
 use App\Models\Post;
+use App\Models\Saves;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -75,13 +76,25 @@ class ProfileController extends Controller
                     $posts = Post::orderBy('published_at', 'desc')
                                 ->where('user_id', $user->id)
                                 ->where('visibility', 'private')
-                                ->paginate(24);
+                                ->paginate(8);
                 } else {
                     $posts = new LengthAwarePaginator([], 0, 8, 1); // empty paginator
                 }
                 break;
+            case 'saved':
+                    $saved = Saves::where('user_id', Auth::id())->first();
+                    if ($user->name === Auth::user()->name&&$saved) {
+                        $posts = Post::orderBy('published_at', 'desc')
+                                    ->where('user_id', $saved->user_id)
+                                    ->where('visibility', 'private')
+                                    ->paginate(8);
+                    } else {
+                        $posts = new LengthAwarePaginator([], 0, 8, 1); // empty paginator
+                    }
+                break;
+                break;
             default:
-                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(24);
+                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(8);
                 break;
         }
         if($request->ajax())

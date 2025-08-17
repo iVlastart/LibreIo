@@ -2,9 +2,8 @@
     <x-video-preview 
         src="{{ $video->thumbnail }}"
         title="{{ $video->title }}" 
-        views="{{ $video->views }}" 
+        views="{{ 100 }}" 
         slug="{{ $video->slug }}"
-        date="{{ $video->published_at }}"
+        date="{{ \Carbon\Carbon::parse($video->published_at)->format('Y-m-d H:i:s') }}"
     />
 @endforeach
-{{ $posts->links() }}

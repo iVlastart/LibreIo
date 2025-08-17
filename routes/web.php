@@ -14,11 +14,16 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function (Request $request) {
-    $posts = Post::where('visibility', 'public')->inRandomOrder()->paginate(8);
+    $seed = session()->get('post_seed', rand());
+    session(['post_seed' => $seed]);
+
+    $posts = Post::where('visibility', 'public')
+                ->inRandomOrder($seed)
+                ->paginate(8);
     
     if($request->ajax())
     {
-        return view('partials.posts', compact('posts'));
+        return view('partials.posts', compact('posts'))->render();
     }
 
     return view('home.home', compact('posts'));
