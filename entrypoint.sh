@@ -12,6 +12,12 @@ fi
 # Set permissions
 chmod -R 777 /var/www/database
 
+# Clear caches safely at runtime
+php artisan config:clear
+php artisan cache:clear
+php artisan route:clear
+php artisan view:clear
+
 # Run migrations
 php artisan migrate --force
 
