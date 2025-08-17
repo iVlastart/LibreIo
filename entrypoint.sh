@@ -1,25 +1,21 @@
 #!/bin/bash
 set -e
 
-# Ensure DB folder exists
+# Ensure database folder and file exist
 mkdir -p /var/www/database
-
-# Create SQLite file if it doesn't exist
 if [ ! -f /var/www/database/database.sqlite ]; then
     touch /var/www/database/database.sqlite
 fi
-
-# Set permissions
 chmod -R 777 /var/www/database
 
-# Clear caches safely at runtime
+# Run migrations first
+php artisan migrate --force
+
+# Clear caches safely
 php artisan config:clear
-php artisan cache:clear
+php artisan cache:clear || true  # Ignore error if cache table doesn't exist yet
 php artisan route:clear
 php artisan view:clear
-
-# Run migrations
-php artisan migrate --force
 
 # Start Laravel server
 php artisan serve --host=0.0.0.0 --port=10000
