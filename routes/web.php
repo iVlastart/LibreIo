@@ -18,7 +18,7 @@ Route::get('/home', function (Request $request) {
     
     if($request->ajax())
     {
-        return view('partials.posts', compact('posts'))->render();
+        return view('partials.posts', compact('posts'));
     }
 
     return view('home.home', compact('posts'));
