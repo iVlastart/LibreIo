@@ -28,9 +28,15 @@ COPY --from=frontend /app/public/build ./public/build
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
+#setup db
+RUN mkdir -p database && touch database/database.sqlite
+RUN chmod -R 777 database
+
 # Laravel setup
 RUN php artisan config:clear && \
     php artisan route:clear && \
     php artisan view:clear
 
-CMD php artisan serve --host=0.0.0.0 --port=10000
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+CMD ["/entrypoint.sh"]
