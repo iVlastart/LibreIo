@@ -33,9 +33,10 @@ RUN mkdir -p database && touch database/database.sqlite
 RUN chmod -R 777 database
 
 # Laravel setup
-RUN php artisan config:clear && \
-    php artisan route:clear && \
-    php artisan view:clear
+RUN php artisan config:clear
+RUN php artisan cache:clear
+RUN php artisan route:clear
+RUN php artisan view:clear
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
