@@ -91,7 +91,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         $post = DB::table('posts')->where('slug',$id)->get()->first();
         $user = DB::table('users')->where('id', $post->user_id)->get()->first();
@@ -99,6 +99,24 @@ class PostController extends Controller
             && Auth::user()->name!==$user->name)
         {
             return redirect('home');
+        }
+        $ip = $request->ip();
+
+        $alreadyViewed = DB::table('Views')
+                            ->where('post_id', $post->id)
+                            ->where(function($query) use ($ip) {
+                                $query->where('user_id', Auth::id())
+                                    ->orWhere('ip_address', $ip);
+                            })
+                            ->exists();
+        if (!$alreadyViewed) {
+            DB::table('Views')->insert([
+                'post_id' => $post->id,
+                'user_id' => Auth::id(),
+                'ip_address' => $ip,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
         $isLiked = Likes::where('user_id', Auth::id())
                         ->where('post_id', $post->id)
@@ -127,7 +145,8 @@ class PostController extends Controller
             'dislikeCount'=>$dislikeCount,
             'username'=>$user->name,
             'followers'=>$followers,
-            'isFollowed'=>Follow::where('follower_id', Auth::id())->first()!==null
+            'isFollowed'=>Follow::where('follower_id', Auth::id())->first()!==null,
+            'views'=>DB::table('Views')->where('post_id', $post->id)->count()
         ]);
     }
 

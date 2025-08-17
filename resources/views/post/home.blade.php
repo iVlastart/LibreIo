@@ -48,7 +48,7 @@
 
         {{-- description --}}
         <section class="container shadow sm sm:rounded-lg pl-1 md:pl-32 mt-1">
-            @include('post.partials.description', ['date'=>$date, 'description'=>$description])
+            @include('post.partials.description', ['date'=>$date, 'description'=>$description, 'views'=>$views])
         </section>
     </x-app-layout>
 </body>
