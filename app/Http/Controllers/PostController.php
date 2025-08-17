@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Follow;
 use App\Models\Likes;
 use App\Models\Post;
+use App\Models\Saves;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -107,6 +108,9 @@ class PostController extends Controller
                         ->where('post_id', $post->id)
                         ->where('status', 'dislike')
                         ->first();
+        $isSaved = Saves::where('user_id', Auth::id())
+                        ->where('post_id', $post->id)
+                        ->first();
         $likeCount = Likes::where('post_id', $post->id)->where('status', 'like')->count();
         $dislikeCount = Likes::where('post_id', $post->id)->where('status', 'dislike')->count();
         $followers = Follow::where('followed_id', $user->id)->count();
@@ -118,6 +122,7 @@ class PostController extends Controller
             'date'=>$post->published_at,
             'isLiked'=>$isLiked,
             'isDisliked'=>$isDisliked,
+            'isSaved'=>$isSaved,
             'likeCount'=>$likeCount,
             'dislikeCount'=>$dislikeCount,
             'username'=>$user->name,
@@ -172,6 +177,28 @@ class PostController extends Controller
         else Likes::create($validated);
 
         return response()->json(['message' => 'Like saved.']);
+    }
+
+    public function save(Request $request)
+    {
+        $validated = $request->validate([
+            'post_id'=>'required|exists:posts,id'
+        ]);
+
+        $validated['user_id'] = Auth::id();
+
+        $exists = Saves::where('user_id', Auth::id())
+                        ->where('post_id', $validated['post_id'])
+                        ->first();
+
+        if($exists)
+        {
+            Saves::where('user_id', Auth::id())
+                ->where('post_id', $validated['post_id'])
+                ->delete();
+        }
+
+        else Saves::create($validated);
     }
 
     private function makeUniqueSlug($title) {

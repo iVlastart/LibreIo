@@ -24,7 +24,7 @@
             @include('post.partials.like-form', ['id'=>$id,
                     'isLiked'=>$isLiked, 'isDisliked'=>$isDisliked,
                     'likeCount'=>$likeCount, 'dislikeCount'=>$dislikeCount])
-            @include('post.partials.save-form')
+            @include('post.partials.save-form', ['id'=>$id,'isSaved'=>$isSaved])
             @include('post.partials.download-form', ['src'=>$src])
         </section>
 
@@ -56,6 +56,7 @@
                                 <div class="overflow-hidden shadow sm sm:rounded-lg p-1 flex flex-col gap-4 items-start">
                                     <div class="flex flex-row gap-6 text-base md:text-xl">
                                         <div><span class="number">100</span> views</div>
+                                        &bull;
                                         <div class="date">
                                             {{ $date }}
                                         </div>

@@ -32,9 +32,10 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
 });
 
-//like dislike a post
+//like dislike and save a post
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/like', [PostController::class, 'like'])->name('post.like');
+    Route::post('/save', [PostController::class, 'save'])->name('post.save');
 });
 
 //follow a person
