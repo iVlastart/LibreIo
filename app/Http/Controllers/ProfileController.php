@@ -76,7 +76,7 @@ class ProfileController extends Controller
                     $posts = Post::orderBy('published_at', 'desc')
                                 ->where('user_id', $user->id)
                                 ->where('visibility', 'private')
-                                ->paginate(8);
+                                ->paginate(40);
                 } else {
                     $posts = new LengthAwarePaginator([], 0, 8, 1); // empty paginator
                 }
@@ -87,14 +87,14 @@ class ProfileController extends Controller
                         $posts = Post::orderBy('published_at', 'desc')
                                     ->where('user_id', $saved->user_id)
                                     ->where('visibility', 'private')
-                                    ->paginate(8);
+                                    ->paginate(40);
                     } else {
                         $posts = new LengthAwarePaginator([], 0, 8, 1); // empty paginator
                     }
                 break;
                 break;
             default:
-                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(8);
+                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(40);
                 break;
         }
         if($request->ajax())
