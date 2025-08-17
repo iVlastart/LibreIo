@@ -7,3 +7,6 @@
         date="{{ $video->published_at }}"
     />
 @endforeach
+<div style="display:none;">
+    {{ $posts->links() }}
+</div>

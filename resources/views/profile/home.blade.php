@@ -73,17 +73,7 @@
                           </button>
                         </div>
                           @if($username===Auth::user()->name)
-                          <div class="hidden sm:ml-6 sm:block">
-                            <div class="flex space-x-4">
-                              <!-- Current: "bg-gray-950/50 text-white", Default: "text-gray-500 hover:bg-white/5 hover:text-white" -->
-                              <a href="{{ route('profile.home', ['username' => $username]) }}" aria-current="page" class="rounded-md text-sm px-3 py-2 font-medium {{ $action==="" ? 'bg-gray-950/50  text-white' :  'text-gray-500 hover:bg-white/5 transition-colors hover:text-black'}}">
-                                  Home
-                              </a>
-                              <a href="{{ route('profile.home', ['username'=>$username, 'action'=>'private']) }}" class="rounded-md px-3 py-2 text-sm font-medium {{ $action==="private" ? 'bg-gray-950/50  text-white' :  'text-gray-500 hover:bg-white/5 transition-colors hover:text-black'}}">
-                                  Private
-                              </a>
-                            </div>
-                          </div>
+                            @include('profile.partials.postmenu', ['username'=>$username])
                           @endif
                         </div>
                       </div>
@@ -94,7 +84,7 @@
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div class="p-6 text-gray-900">
-                                <div id="posts-container" class="mt-5 grid gap-4 
+                                <div class="infinite-scroll mt-5 grid gap-4 
                                         grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                                     @include('partials.posts', ['posts' => $posts])
                                 </div>
