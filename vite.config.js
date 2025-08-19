@@ -19,6 +19,7 @@ export default defineConfig({
                 'resources/js/video-player.js',
             ],
             refresh: true,
+            base: '/'
         }),
     ],
 });

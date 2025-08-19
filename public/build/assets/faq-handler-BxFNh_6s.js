@@ -1,0 +1,1 @@
+document.querySelectorAll(".faqitem").forEach(o=>{o.addEventListener("click",()=>{const e=o.querySelector("p"),s=o.querySelector(".arrowdown"),t=o.querySelector(".arrowup");e.classList.toggle("max-h-0"),e.classList.toggle("opacity-0"),e.classList.toggle("max-h-40"),e.classList.toggle("opacity-100"),s.classList.toggle("hidden"),t.classList.toggle("hidden")})});

@@ -1,0 +1,1 @@
+$(()=>{$.ajaxSetup({headers:{"X-CSRF-TOKEN":$('meta[name="csrf-token"]').attr("content")}}),$(".saveForm").on("submit",function(t){t.preventDefault(),t.stopImmediatePropagation();const a=$(this),n=a.serialize();$.ajax({type:"POST",url:"/save",data:n,success:function(){const e=a.find("svg path");e.attr("fill",e.attr("fill")==="currentColor"?"white":"currentColor")}})})});
