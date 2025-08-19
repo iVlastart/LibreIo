@@ -82,16 +82,14 @@ class ProfileController extends Controller
                 }
                 break;
             case 'saved':
-                    $saved = Saves::where('user_id', Auth::id())->first();
-                    if ($user->name === Auth::user()->name&&$saved) {
+                    if ($user->name === Auth::user()->name) {
+                        $savedPostIDs = Saves::where('user_id', Auth::id())->pluck('post_id');
                         $posts = Post::orderBy('published_at', 'desc')
-                                    ->where('user_id', $saved->user_id)
-                                    ->where('visibility', 'private')
+                                    ->whereIn('id', $savedPostIDs)
                                     ->paginate(40);
                     } else {
-                        $posts = new LengthAwarePaginator([], 0, 8, 1); // empty paginator
+                        $posts = new LengthAwarePaginator([], 0, 8, 1);
                     }
-                break;
                 break;
             default:
                 $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(40);

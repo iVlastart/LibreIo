@@ -78,6 +78,8 @@ fullScreenBtn.addEventListener('click', toggleFullScreen);
 video.addEventListener('enterpictureinpicture', ()=>container.classList.add('mini-player'));
 video.addEventListener('leavepictureinpicture', ()=>container.classList.remove('mini-player'));
 
+muteBtn.addEventListener('click', toggleMute);
+
 //duration listeners
 video.addEventListener('loadedmetadata', ()=>{
     if (video.duration && isFinite(video.duration)) {

@@ -203,7 +203,7 @@ class PostController extends Controller
         $validated = $request->validate([
             'post_id'=>'required|exists:posts,id'
         ]);
-
+        
         $validated['user_id'] = Auth::id();
 
         $exists = Saves::where('user_id', Auth::id())
