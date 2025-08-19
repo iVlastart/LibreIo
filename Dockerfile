@@ -1,4 +1,4 @@
-# Stage 1 - Build Frontend (Vite)
+# Stage 1: Build frontend
 FROM node:18 AS frontend
 WORKDIR /app
 COPY package*.json ./
@@ -6,37 +6,38 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2 - Backend (Laravel + PHP + Composer)
-FROM php:8.2-fpm AS backend
+# Stage 2: PHP / Laravel
+FROM php:8.2-fpm
+WORKDIR /var/www
 
-# Install system dependencies
+# Install system deps
 RUN apt-get update && apt-get install -y \
     git curl unzip libpq-dev libonig-dev libzip-dev zip \
     && docker-php-ext-install pdo pdo_mysql mbstring zip
 
-# Install Composer
+# Install composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-WORKDIR /var/www
-
-# Copy app files
+# Copy app code
 COPY . .
 
-# Copy built frontend from Stage 1
+# Copy frontend build output
 COPY --from=frontend /app/public/build ./public/build
+COPY --from=frontend /app/node_modules ./node_modules
 
-# Install PHP dependencies
+# Install PHP deps
 RUN composer install --no-dev --optimize-autoloader
 
-#setup db
+# Setup SQLite DB
 RUN mkdir -p database && touch database/database.sqlite
 RUN chmod -R 777 database
 
-# Laravel setup
-RUN php artisan config:clear && \
-    php artisan route:clear && \
-    php artisan view:clear
+# Clear caches
+RUN php artisan config:clear \
+    && php artisan route:clear \
+    && php artisan view:clear
 
+# Entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 CMD ["/entrypoint.sh"]
