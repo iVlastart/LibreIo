@@ -5,26 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$username}}</title>
     <!-- Scripts -->
-    @vite(['resources/js/date-handler.js'])
+    @vite(['resources/js/date-handler.js', 'resources/js/number-handler.js'])
 </head>
 <body>
     <x-app-layout>
-        <div class="p-16"><div class="p-8 bg-white shadow mt-24">
-            <div class="grid grid-cols-1 md:grid-cols-3">
-                <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
-                    <div>
-                        <p class="font-bold text-gray-700 text-xl">{{$videosCount}}</p>        
-                        <p class="text-gray-400 text-sm lg:text-xl">Videos</p>
+        <div class="p-16">
+            <div class="p-8 bg-white shadow mt-24">
+                <div class="grid grid-cols-1 md:grid-cols-3">
+                    <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
+                        <div>
+                            <p class="number font-bold text-gray-700 text-xl">{{$videosCount}}</p>        
+                            <p class="text-gray-400 text-sm lg:text-xl">Videos</p>
+                        </div>
+                        <div>           
+                            <p class="number font-bold text-gray-700 text-xl">{{$followersCount}}</p>
+                            <p class="text-gray-400 text-sm lg:text-xl">Followers</p>
+                        </div>
+                        <div>          
+                            <p class="number font-bold text-gray-700 text-xl">{{$followingCount}}</p>
+                            <p class="text-gray-400 text-sm lg:text-xl">Following</p>
+                        </div>
                     </div>
-                    <div>           
-                        <p class="font-bold text-gray-700 text-xl">{{$followersCount}}</p>
-                        <p class="text-gray-400 text-sm lg:text-xl">Followers</p>
-                    </div>
-                    <div>          
-                        <p class="font-bold text-gray-700 text-xl">{{$followingCount}}</p>
-                        <p class="text-gray-400 text-sm lg:text-xl">Following</p>
-                    </div>
-                </div>
                     <div class="relative">
                         @include('profile.partials.pfp', ['class'=>'inset-x-0 top-0 -mt-24', 'pfp'=>$pfp, 'username'=>$username])    
                     </div>    
@@ -56,7 +57,7 @@
 
                 {{-- navbar user --}}
                 <div class="flex flex-row gap-4">
-                  <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
+                    <!-- <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script> -->
                     <nav class="relative bg-white after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-white/10">
                         <div class="mx-auto max-w-7xl md:px-6">
                             <div class="relative flex h-16 items-center justify-between">
@@ -86,7 +87,6 @@
                 </div>
             </div>
         </div>
-        
     </x-app-layout>
 </body>
 </html>
