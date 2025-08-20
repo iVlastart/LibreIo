@@ -241,18 +241,10 @@ class PostController extends Controller
         $followedUsers = Follow::where('follower_id', Auth::id())
             ->pluck('followed_id');
 
-        foreach($followedUsers as $userId) 
-        {
-            $user = User::find($userId);
-            if(Post::where('user_id', $userId)->count() === 0)
-            {
-                continue;
-            }
-            $posts = Post::where('user_id', $userId)
-                ->where('visibility', 'public')
-                ->inRandomOrder($seed)
-                ->paginate(40);
-        }
+        $posts = Post::whereIn('user_id', $followedUsers)
+            ->where('visibility', 'public')
+            ->inRandomOrder($seed)
+            ->paginate(40);
 
         if($request->ajax())
         {

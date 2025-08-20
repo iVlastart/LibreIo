@@ -5,5 +5,9 @@
         @include('home.partials.header', ['title' => 'Search Results for "' . $query . '"'])
     </x-slot>
 
-    @include('partials.posts-grid', ['posts' => $posts])
+    @if($posts->isNotEmpty())
+        @include('partials.posts-grid', ['posts' => $posts])
+    @else
+        @include('home.partials.no-posts', ['msg' => 'Try searching for something else.'])
+    @endif
 </x-app-layout>
