@@ -3,11 +3,14 @@ import { formatDates } from './date-handler';
 
 $(()=>{
     let page = 1;
+    let morePosts = true;
 
     $(window).scroll(function() {
         if ($(window).scrollTop() + $(window).height() >= $(document).height() - 100) {
             page++;
-            loadMoreData(page);
+            morePosts 
+                ? loadMoreData(page)
+                : $('#loading').text('No more posts to load');
         }
     });
 
@@ -20,7 +23,9 @@ $(()=>{
                 $('#loading').show();
             },
             success: function(data) {
-                if (data.trim() === "") {
+                if (data.trim() === "") 
+                {
+                    morePosts = false;
                     return;
                 }
                 $('#loading').hide();
