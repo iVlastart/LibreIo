@@ -10,45 +10,13 @@ const totalTime = document.querySelector('.total-time');
 const timelineContainer = document.querySelector('.timeline-container');
 const video = document.querySelector('video');
 
-document.addEventListener('keydown', e=>{
-    const tagName = document.activeElement.tagName.toLowerCase();
-    if(tagName==="input") return;
-    switch(e.key.toLowerCase())
-    {
-        case " ":
-                if(tagName==="button") return;
-            case "k":
-                e.preventDefault();
-                togglePlay();
-                break;
-            case "i":
-                toggleMiniPlayer();
-                break;
-            case "t":
-                toggleTheater();
-                break;
-            case "f":
-                toggleFullScreen();
-                break;
-            case "m":
-                toggleMute();
-                break;
-            /*case "arrowleft":
-                case "j":
-                    skip(-5);
-                    break;
-            case "arrowright":
-                case "l":
-                    skip(5);
-                    break;*/
-    }
-});
-
 playPauseBtn.addEventListener('click', togglePlay);
 video.addEventListener('click', togglePlay)
 
 video.addEventListener('play', ()=>container.classList.remove('paused'));
 video.addEventListener('pause', ()=>container.classList.add('paused'));
+
+document.addEventListener('keydown', function(e){handleKeydown(e);});
 
 document.addEventListener('fullscreenchange',()=>container.classList.toggle('full-screen', document.fullscreenElement));
 
@@ -87,16 +55,53 @@ video.addEventListener('loadedmetadata', ()=>{
     }
 });
 video.addEventListener('timeupdate', ()=>{
-    if (video.duration && isFinite(video.duration)) {
-    currentTime.textContent = formatDuration(video.currentTime);
-    const percentage = video.currentTime / video.duration;
-    timelineContainer.style.setProperty('--progress-position', percentage);}
+        if (video.duration && isFinite(video.duration)) {
+        currentTime.textContent = formatDuration(video.currentTime);
+        const percentage = video.currentTime / video.duration;
+        timelineContainer.style.setProperty('--progress-position', percentage);
+    }
 });
-//timelineContainer.addEventListener('mousemove', timelineUpdate);
-//timelineContainer.addEventListener('mousedown', toggleScrubbing);
+timelineContainer.addEventListener('mousemove', timelineUpdate);
+timelineContainer.addEventListener('mousedown', toggleScrubbing);
 
 //like dislike a post
 
+//vid key handler
+function handleKeydown(e)
+{
+    const tagName = document.activeElement.tagName.toLowerCase();
+    
+    if(tagName==="input") return;
+    switch(e.key.toLowerCase())
+    {
+        case " ":
+        case "k":
+            if (tagName === "button") return;
+            e.preventDefault();
+            togglePlay();
+            break;
+        case "i":
+            toggleMiniPlayer();
+            break;
+        case "t":
+            toggleTheater();
+            break;
+        case "f":
+            toggleFullScreen();
+            break;
+        case "m":
+            toggleMute();
+            break;
+        case "arrowleft":
+        case "j":
+            skip(Number(5));
+            break;
+        case "arrowright":
+        case "l":
+            skip(Number(-5));
+            break;
+    }
+}
 
 //view mods
 function togglePlay()
@@ -131,8 +136,8 @@ function toggleMute()
 
 //duration
 const leadingZeroFormatter = new Intl.NumberFormat(undefined, {
-        minimumIntegerDigits: 2
-    });
+    minimumIntegerDigits: 2
+});
 function formatDuration(t)
 {
     
@@ -145,7 +150,8 @@ function formatDuration(t)
         : `${h}:${m}:${leadingZeroFormatter.format(s)}`;
 }
 
-/*function timelineUpdate(e)
+
+function timelineUpdate(e)
 {
     const rect = timelineContainer.getBoundingClientRect();
     const percentage = Math.min(Math.max(0, e.x - rect.x), rect.width)/rect.width;
@@ -179,9 +185,9 @@ function toggleScrubbing(e)
     }
 
     timelineUpdate(e);
-}*/
+}
 
-/*function skip(t)
+function skip(t)
 {
-    video.currentTime+=t;
-}*/
+    video.currentTime += t;
+}

@@ -46,11 +46,18 @@ class PostController extends Controller
             'thumbnail'=>['nullable', 'mimes:jpg,jpeg,png,webp']
         ]);
         $data['slug'] = $this->makeUniqueSlug($data['title']);
-        $file = $data['src'];
-        unset($data['src']);
+        $file = $request->file('src');
+        $filename = $file->getClientOriginalPath();
+        $dirPath = storage_path('app/public/uploads/' . $data['slug']);
 
-        $path = $file->store('uploads/'.$data['slug'], 'public');
-        $filename = basename($path);
+        if (!file_exists($dirPath)) {
+            mkdir($dirPath, 0755, true);
+        }
+        $path = $dirPath . '/' . $filename;
+        $file->move($dirPath, $filename);
+
+        $vidOutput = [];
+        exec('ffmpeg -i '.escapeshellarg($filename).' -c copy -movflags faststart '.escapeshellarg($path).' 2>&1', $vidOutput);
 
         $thumbnail = $request->file('thumbnail');
 
@@ -72,14 +79,9 @@ class PostController extends Controller
             exec('ffmpeg -i '.escapeshellarg($vidPath).' -vframes 1 -q:v 90 '.escapeshellarg($imgPath).' 2>&1', $output);
             $data['thumbnail'] = 'uploads/' . $data['slug'].'/'.$data['slug'].'-preview.webp';
         }
-        
 
 
-        
-        
-        
-
-        $data['src'] = $path;
+        $data['src'] = 'uploads/' . $data['slug'] . '/' . $filename;
         $data['user_id'] = Auth::id();
         
         $data['published_at'] = now();
