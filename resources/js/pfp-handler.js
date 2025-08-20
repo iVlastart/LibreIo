@@ -20,7 +20,7 @@ $(()=>{
             data: formData,
             processData: false,
             contentType: false,
-            success: (resp)=>location.reload(),
+            success: ()=>location.reload(),
         });
     });
 });

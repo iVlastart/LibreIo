@@ -11,7 +11,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -117,8 +119,12 @@ class ProfileController extends Controller
         $request->validate([
             'pfp'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $data['pfp'] = null;
+        $user = User::find(Auth::id());
+        $data['pfp'] = $user->pfp ?? null;
+        if($data['pfp']!==null)
+        {
+            Storage::disk('public')->delete($data['pfp']);
+        }
         $pfp = $request->file('pfp');
         if($pfp)
         {
@@ -126,7 +132,7 @@ class ProfileController extends Controller
         }
         $data['pfp'] = $pfpPath;
 
-        $user = User::find(Auth::id());
+        
         $user->pfp = $data['pfp'];
         $user->save();
     }
