@@ -236,7 +236,22 @@ class PostController extends Controller
 
     public function following(Request $request)
     {
-        return view('home.following');
+        $followedUsers = Follow::where('follower_id', Auth::id())
+            ->pluck('followed_id');
+
+        foreach($followedUsers as $userId) 
+        {
+            $posts = Post::where('user_id', $userId)
+                ->where('visibility', 'public')
+                ->inRandomOrder()
+                ->paginate(40);
+        }
+
+        if($request->ajax())
+        {
+            return view('partials.posts', compact('posts'))->render();
+        }
+        return view('home.following', compact('posts'))->render();
     }
 
     private function makeUniqueSlug($title) {
