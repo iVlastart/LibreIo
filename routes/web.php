@@ -19,7 +19,7 @@ Route::get('/home', function (Request $request) {
 
     $posts = Post::where('visibility', 'public')
                 ->inRandomOrder($seed)
-                ->paginate(40);
+                ->paginate(20);
     
     if($request->ajax())
     {

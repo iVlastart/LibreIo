@@ -223,7 +223,7 @@ class PostController extends Controller
 
     public function search(string $query, Request $request)
     {
-        $posts = Post::where('title', 'like', '%' . $query . '%')->paginate(40);
+        $posts = Post::where('title', 'like', '%' . $query . '%')->paginate(20);
 
         if($request->ajax())
         {
@@ -244,7 +244,7 @@ class PostController extends Controller
         $posts = Post::whereIn('user_id', $followedUsers)
             ->where('visibility', 'public')
             ->inRandomOrder($seed)
-            ->paginate(40);
+            ->paginate(20);
 
         if($request->ajax())
         {

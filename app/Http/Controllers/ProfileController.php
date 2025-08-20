@@ -78,7 +78,7 @@ class ProfileController extends Controller
                     $posts = Post::orderBy('published_at', 'desc')
                                 ->where('user_id', $user->id)
                                 ->where('visibility', 'private')
-                                ->paginate(40);
+                                ->paginate(20);
                 } else {
                     $posts = new LengthAwarePaginator([], 0, 8, 1); // empty paginator
                 }
@@ -88,20 +88,20 @@ class ProfileController extends Controller
                         $savedPostIDs = Saves::where('user_id', Auth::id())->pluck('post_id');
                         $posts = Post::orderBy('published_at', 'desc')
                                     ->whereIn('id', $savedPostIDs)
-                                    ->paginate(40);
+                                    ->paginate(20);
                     } else {
                         $posts = new LengthAwarePaginator([], 0, 8, 1);
                     }
                 break;
             default:
-                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(40);
+                $posts = Post::orderBy('published_at', 'desc')->where('user_id', $user->id)->where('visibility', 'public')->paginate(20);
                 break;
         }
         if($request->ajax())
         {
             return view('partials.posts', compact('posts'))->render();
         }
-        return view('profile.home', [
+        return view('profile.home', compact('posts'), [
                         'videosCount' => $videosCount,
                         'username' => $username,
                         'action' => $action,

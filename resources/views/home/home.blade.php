@@ -1,3 +1,4 @@
+@vite('resources/js/infiniteScroll.js')
 <x-app-layout>
     <x-slot name="header">
         @include('home.partials.header', ['title' => 'Home'])
