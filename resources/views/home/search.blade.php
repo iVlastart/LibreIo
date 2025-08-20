@@ -10,5 +10,5 @@
         </div>
     </x-slot>
 
-    @include('home.partials.posts-grid', ['posts' => $posts])
+    @include('partials.posts-grid', ['posts' => $posts])
 </x-app-layout>
