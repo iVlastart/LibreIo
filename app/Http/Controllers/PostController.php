@@ -236,6 +236,8 @@ class PostController extends Controller
 
     public function following(Request $request)
     {
+        $seed = session()->get('post_seed', rand());
+        session(['post_seed' => $seed]);
         $followedUsers = Follow::where('follower_id', Auth::id())
             ->pluck('followed_id');
 
@@ -243,7 +245,7 @@ class PostController extends Controller
         {
             $posts = Post::where('user_id', $userId)
                 ->where('visibility', 'public')
-                ->inRandomOrder()
+                ->inRandomOrder($seed)
                 ->paginate(40);
         }
 
