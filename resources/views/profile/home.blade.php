@@ -29,7 +29,7 @@
                     <div class="relative">
                         @include('profile.partials.pfp', ['class'=>'inset-x-0 top-0 -mt-24', 'pfp'=>$pfp, 'username'=>$username])    
                     </div>    
-                    <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
+                    <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center max-sm:mx-auto">
                         @if(Auth::user()->name===$username)
                             <a href="{{ route('profile.edit') }}" class="text-black py-4 px-4 uppercase rounded bg-white border border-black hover:bg-slate-100
                                     shadow hover:shadow-lg font-medium transition transform hover:-translate-y-0.5 cursor-pointer">Edit</a>                            
