@@ -15,11 +15,11 @@ export function formatDates(container = document) {
 
         let label = "";
         if (diffMins < 1) label = "just now";
-        else if (diffMins < 60) label = `${diffMins} mins ago`;
-        else if (diffHours < 24) label = `${diffHours} hours ago`;
-        else if (diffDays < 30) label = `${diffDays} days ago`;
-        else if (diffMonths < 12) label = `${diffMonths} months ago`;
-        else label = `${diffYears} years ago`;
+        else if (diffMins < 60) label = `${diffMins} ${diffMins===1?'min':'mins'} ago`;
+        else if (diffHours < 24) label = `${diffHours} ${diffHours===1?'hour':'hours'} ago`;
+        else if (diffDays < 30) label = `${diffDays} ${diffDays===1?'day':'days'} ago`;
+        else if (diffMonths < 12) label = `${diffMonths} ${diffMonths===1?'month':'months'} ago`;
+        else label = `${diffYears} ${diffYears===1?'year':'years'} ago`;
 
         dateDiv.innerText = label;
     });
