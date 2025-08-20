@@ -46,18 +46,14 @@ class PostController extends Controller
             'thumbnail'=>['nullable', 'mimes:jpg,jpeg,png,webp']
         ]);
         $data['slug'] = $this->makeUniqueSlug($data['title']);
-        $file = $request->file('src');
-        $filename = $file->getClientOriginalPath();
-        $dirPath = storage_path('app/public/uploads/' . $data['slug']);
+        $file = $data['src'];
+        unset($data['src']);
 
-        if (!file_exists($dirPath)) {
-            mkdir($dirPath, 0755, true);
-        }
-        $path = $dirPath . '/' . $filename;
-        $file->move($dirPath, $filename);
+        $path = $file->store('uploads/'.$data['slug'], 'public');
+        $filename = basename($path);
 
-        $vidOutput = [];
-        exec('ffmpeg -i '.escapeshellarg($filename).' -c copy -movflags faststart '.escapeshellarg($path).' 2>&1', $vidOutput);
+        //$vidOutput = [];
+        //exec('ffmpeg -i '.escapeshellarg($filename).' -c copy -movflags faststart '.escapeshellarg($path).' 2>&1', $vidOutput);
 
         $thumbnail = $request->file('thumbnail');
 
@@ -81,7 +77,7 @@ class PostController extends Controller
         }
 
 
-        $data['src'] = 'uploads/' . $data['slug'] . '/' . $filename;
+        $data['src'] = $path;
         $data['user_id'] = Auth::id();
         
         $data['published_at'] = now();
