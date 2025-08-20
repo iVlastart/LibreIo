@@ -17,6 +17,7 @@ export default defineConfig({
                 'resources/js/number-handler.js',
                 'resources/js/save-handler.js',
                 'resources/js/video-player.js',
+                'resources/js/vid-click-handler.js',
             ],
             refresh: true,
             base: '/'
