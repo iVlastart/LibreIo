@@ -29,7 +29,8 @@ Route::get('/home', function (Request $request) {
     return view('home.home', compact('posts'));
 })->middleware(['auth', 'verified'])->name('home');
 
-Route::get('/search/{query}', [PostController::class, 'search'])->name('post.search');
+Route::get('/search/{query}', [PostController::class, 'search'])->name('post.search')->middleware(['auth', 'verified']);
+Route::get('/following', [PostController::class, 'following'])->name('following')->middleware(['auth', 'verified']);
 
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
 

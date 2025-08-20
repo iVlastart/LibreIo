@@ -234,6 +234,11 @@ class PostController extends Controller
         ])->render();
     }
 
+    public function following(Request $request)
+    {
+        return view('home.following');
+    }
+
     private function makeUniqueSlug($title) {
         $slug = Str::slug($title);
         $originalSlug = $slug;
