@@ -38,13 +38,14 @@
                                 
                                 <div class="mt-4">
                                     <x-input-label for="Title" :value="__('Title')"/>
-                                    <x-text-input name="title" id="Title" class="block mt-1 w-full" type="text" :value="__('')"/>
+                                    <x-text-input name="title" id="Title" class="block mt-1 w-full" type="text" :value="__('')" maxlength="30"/>
                                     <x-input-error :messages="$errors->get('title')" class="mt-2"/>
                                 </div>
                                 
                                 <div class="mt-4">
                                     <x-input-label for="Description" :value="__('Description')"/>
-                                    <x-textarea-input name="descr" id="Description" class="block mt-1 w-full" :value="__('')"/>
+                                    <x-textarea-input name="descr" id="Description" class="block mt-1 w-full" :value="__('')"
+                                             maxlength="500"/>
                                     <x-input-error :messages="$errors->get('descr')" class="mt-2"/>
                                 </div>
                                 

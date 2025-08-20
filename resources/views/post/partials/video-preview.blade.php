@@ -1,25 +1,22 @@
 @props(['src'=>null, 'title' => null, 'views'=>0, 'slug'=>null, 'date'=>null])
 
-<div class="preview-container grid grid-cols-3 grid-rows-[auto_auto_auto_auto] border 
-            border-black w-full hover:cursor-pointer"
-        data-slug="{{ $slug }}">
-    <header class="col-span-3 row-span-2">
-        <div class="aspect-video bg-black flex items-center justify-center">
-            <img src="{{ asset("/storage/$src") }}" 
-                class="w-full h-full object-contain" 
-                onerror="alert('there was an error loading the img')" />
+<x-card class="transition-transform duration-500 ease-in-out hover:scale-110">
+    <div class="preview-container cursor-pointer" data-slug="{{ $slug }}">
+        <div class="relative">
+            <div class="aspect-video bg-black flex items-center justify-center">
+                <img src="{{ asset("/storage/$src") }}" 
+                    class="w-full h-full object-contain" 
+                    onerror="alert('there was an error loading the img')" />
+            </div>
+            <div class="absolute bottom-0 left-0 bg-black bg-opacity-50 text-white p-2 rounded-b-lg">
+                <h3 class="text-lg font-semibold">{{ $title }}</h3>
+                <p></p>
+                <p class="text-sm">{{ $views }} {{$views===1?'view':'views'}}</p>
+                <p class="date text-xs">{{ $date }}</p>
+            </div>
         </div>
-    </header>
-    
-    <main class="col-span-3 font-bold row-start-3 text-2xl border border-black">
-        {{ $title }}
-    </main>
-    <div class="col-span-1 row-start-4 border border-black">
-        {{ $views }} views
     </div>
-    <div class="date col-start-2 col-span-2 row-start-4 text-center">
-        {{ $date }}
-    </div>
+</x-card>
     <script>
         document.addEventListener('DOMContentLoaded', ()=>{
             document.querySelectorAll('.preview-container').forEach(element=>{
@@ -33,4 +30,3 @@
             });
         });
     </script>
-</div>
