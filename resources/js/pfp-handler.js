@@ -20,13 +20,7 @@ $(()=>{
             data: formData,
             processData: false,
             contentType: false,
-            success: (resp)=>{
-                alert('Profile picture updated successfully!');
-            },
-            error: (xhr) => {
-                const errorMessage = xhr.responseJSON?.message || 'An error occurred while uploading the profile picture.';
-                console.log(errorMessage);
-            }
+            success: (resp)=>location.reload(),
         });
     });
 });

@@ -122,8 +122,6 @@ class ProfileController extends Controller
         $pfp = $request->file('pfp');
         if($pfp)
         {
-            
-
             $pfpPath = $pfp->store('profile/'.Auth::user()->name, 'public');
         }
         $data['pfp'] = $pfpPath;
