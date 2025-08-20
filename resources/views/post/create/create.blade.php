@@ -10,9 +10,11 @@
         <div class="py-4">
             <div class="max-w-3xl mx-auto sm:px-6:lg-px-8">
                 <div class="bg-white overflow-hidden shadow sm sm:rounded-lg">
-                    <header class="text-center my-2">
-                        Create a new post
-                    </header>
+                    <x-slot name="header">
+                        <h2 id="Title" class="font-semibold text-xl text-gray-800 leading-tight hover:cursor-pointer w-fit">
+                            Create a new post
+                        </h2>
+                    </x-slot>
                         <form action="{{ route('post.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="p-2">

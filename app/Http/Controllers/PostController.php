@@ -221,6 +221,14 @@ class PostController extends Controller
         else Saves::create($validated);
     }
 
+    public function search(string $query)
+    {
+        $posts = Post::where('title', 'like', '%' . $query . '%')->paginate(40);
+        return view('home.search')->with([
+            'query' => $query,
+        ]);
+    }
+
     private function makeUniqueSlug($title) {
         $slug = Str::slug($title);
         $originalSlug = $slug;
