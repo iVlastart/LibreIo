@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        @include('home.partials.header', ['title' => 'LibreIo'])    
+        @include('home.partials.header', ['title' => 'Following'])    
     </x-slot>
     @if($posts->isNotEmpty())
         @include('partials.posts-grid', ['posts'=>$posts])
