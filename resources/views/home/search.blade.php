@@ -2,12 +2,7 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-row items-center">
-            <h2 id="Title" class="font-semibold text-xl text-gray-800 leading-tight hover:cursor-pointer w-fit">
-                Search Results for "{{ $query }}"
-            </h2>
-            @include('home.partials.searchbar')
-        </div>
+        @include('home.partials.header', ['title' => 'Search Results for "' . $query . '"'])
     </x-slot>
 
     @include('partials.posts-grid', ['posts' => $posts])
