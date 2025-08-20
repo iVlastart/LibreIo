@@ -109,7 +109,7 @@ class ProfileController extends Controller
                         'followingCount' => Follow::where('follower_id', $user->id)->count(),
                         'bio' => $user->bio,
                         'pfp' => $user->pfp,
-                        'isFollowed'=>Follow::where('follower_id', $authUser->id)->first()!==null,
+                        'isFollowed'=>Follow::where('follower_id', $authUser->id)->where('followed_id', $user->id)->first()!==null,
                         'posts'=>$posts
                     ]);
     }

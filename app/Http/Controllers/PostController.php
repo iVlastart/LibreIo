@@ -243,6 +243,11 @@ class PostController extends Controller
 
         foreach($followedUsers as $userId) 
         {
+            $user = User::find($userId);
+            if(Post::where('user_id', $userId)->count() === 0)
+            {
+                continue;
+            }
             $posts = Post::where('user_id', $userId)
                 ->where('visibility', 'public')
                 ->inRandomOrder($seed)

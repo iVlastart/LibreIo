@@ -2,6 +2,9 @@
     <x-slot name="header">
         @include('home.partials.header', ['title' => 'LibreIo'])    
     </x-slot>
-
-    @include('partials.posts-grid', ['posts'=>$posts])
+    @if($posts->isNotEmpty())
+        @include('partials.posts-grid', ['posts'=>$posts])
+    @else
+        @include('home.partials.no-posts', ['msg' => 'When you follow someone, their posts will appear here.'])
+    @endif
 </x-app-layout>
