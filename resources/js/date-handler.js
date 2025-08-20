@@ -1,8 +1,9 @@
 export function formatDates(container = document) {
     container.querySelectorAll('.date').forEach(dateDiv => {
         const vidDateStr = dateDiv.textContent.trim();
-        const vidDate = new Date(vidDateStr); // ISO 8601 works perfectly
-        if (isNaN(vidDate)) return; // skip invalid dates
+        const isoStr = vidDateStr.replace(" ", "T") + "Z";
+        const vidDate = new Date(isoStr);
+        if (isNaN(vidDate)) return;
 
         const now = new Date();
         const diffMs = now - vidDate;
