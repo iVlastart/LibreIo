@@ -43,9 +43,10 @@ Route::middleware(['auth', 'verified'])->group(function(){
     Route::post('/save', [PostController::class, 'save'])->name('post.save');
 });
 
-//follow a person
+//follow a person and upload a profile picture
 Route::middleware(['auth', 'verified'])->group(function (){
     Route::post('/follow', [FollowController::class, 'follow'])->name('profile.follow');
+    Route::post('/upload-pfp', [ProfileController::class, 'uploadPfp'])->name('profile.upload.pfp');
 });
 
 Route::get('/profile/{username}/{action?}', [ProfileController::class, 'show'])->name('profile.home');

@@ -106,8 +106,30 @@ class ProfileController extends Controller
                         'followersCount' => Follow::where('followed_id', $user->id)->count(),
                         'followingCount' => Follow::where('follower_id', $user->id)->count(),
                         'bio' => $user->bio,
+                        'pfp' => $user->pfp,
                         'isFollowed'=>Follow::where('follower_id', $authUser->id)->first()!==null,
                         'posts'=>$posts
                     ]);
+    }
+
+    public function uploadPfp(Request $request)
+    {
+        $request->validate([
+            'pfp'=>'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $data['pfp'] = null;
+        $pfp = $request->file('pfp');
+        if($pfp)
+        {
+            
+
+            $pfpPath = $pfp->store('profile/'.Auth::user()->name, 'public');
+        }
+        $data['pfp'] = $pfpPath;
+
+        $user = User::find(Auth::id());
+        $user->pfp = $data['pfp'];
+        $user->save();
     }
 }

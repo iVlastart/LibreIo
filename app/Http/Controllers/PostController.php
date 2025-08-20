@@ -144,6 +144,7 @@ class PostController extends Controller
             'likeCount'=>$likeCount,
             'dislikeCount'=>$dislikeCount,
             'username'=>$user->name,
+            'pfp'=>$user->pfp,
             'followers'=>$followers,
             'isFollowed'=>Follow::where('follower_id', Auth::id())->first()!==null,
             'views'=>DB::table('Views')->where('post_id', $post->id)->count()

@@ -14,19 +14,19 @@
                 <div class="grid grid-cols-3 text-center order-last md:order-first mt-20 md:mt-0">
                     <div>
                         <p class="font-bold text-gray-700 text-xl">{{$videosCount}}</p>        
-                        <p class="text-gray-400 text-sm md:text-xl">Videos</p>
+                        <p class="text-gray-400 text-sm lg:text-xl">Videos</p>
                     </div>
                     <div>           
                         <p class="font-bold text-gray-700 text-xl">{{$followersCount}}</p>
-                        <p class="text-gray-400 text-sm md:text-xl">Followers</p>
+                        <p class="text-gray-400 text-sm lg:text-xl">Followers</p>
                     </div>
                     <div>          
                         <p class="font-bold text-gray-700 text-xl">{{$followingCount}}</p>
-                        <p class="text-gray-400 text-sm md:text-xl">Following</p>
+                        <p class="text-gray-400 text-sm lg:text-xl">Following</p>
                     </div>
                 </div>
                     <div class="relative">
-                        @include('profile.partials.pfp', ['profile'=>true])    
+                        @include('profile.partials.pfp', ['class'=>'inset-x-0 top-0 -mt-24', 'pfp'=>$pfp, 'username'=>$username])    
                     </div>    
                     <div class="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">
                         @if(Auth::user()->name===$username)
