@@ -68,7 +68,11 @@
                         </div>
                     </nav>
                 </div>
-                    @include('partials.posts-grid', ['posts' => $posts])
+                    @if($posts->isNotEmpty())
+                        @include('partials.posts-grid', ['posts' => $posts])
+                    @else
+                        @include('home.partials.no-posts', ['msg' => 'You haven\'t posted anything yet.'])
+                    @endif
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@
                                     <input name="src" class="block w-full text-sm text-gray-900 border 
                                             border-gray-300 rounded-lg cursor-pointer bg-gray-50" 
                                             id="file_input" type="file">
-                                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">MP4 (MAX. 40MB).</p>
+                                    <p class="mt-1 text-sm text-gray-500" id="file_input_help">MP4 (MAX. 5GB).</p>
                                     <x-input-error :messages="$errors->get('src')" class="mt-2"/>
                                 </div>
 

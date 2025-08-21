@@ -7,7 +7,7 @@
                 </div>
             </div>
             <div class="controls">
-                <button class="play-pause-btn">
+                <button class="play-pause-btn" title="Play (k)">
                     <svg class="play-icon" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
                     </svg>
@@ -16,7 +16,7 @@
                     </svg>
                 </button>
                 <div class="volume-container">
-                    <button class="mute-btn">
+                    <button class="mute-btn" title="Mute (m)">
                         <svg class="volume-high-icon" viewBox="0 0 24 24">
                             <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
                         </svg>
@@ -35,12 +35,12 @@
                     <div class="total-time">0:00</div>
                 </div>
                 
-                <button class="mini-player-btn">
+                <button class="mini-player-btn" title="Mini Player (i)">
                     <svg viewBox="0 0 24 24">
                         <path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z"/>
                     </svg>
                 </button>
-                <button class="theater-btn">
+                <button class="theater-btn" title="Theater Mode (t)">
                     <svg class="tall-icon" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z"/>
                     </svg>
@@ -48,7 +48,7 @@
                         <path fill="currentColor" d="M19 7H5c-1.1 0-2 .9-2 2v6c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2zm0 8H5V9h14v6z"/>
                     </svg>
                 </button>
-                <button class="full-screen-btn">
+                <button class="full-screen-btn" title="Full Screen (f)">
                     <svg class="open-icon" viewBox="0 0 24 24">
                         <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                     </svg>

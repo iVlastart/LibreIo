@@ -39,7 +39,7 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'src'=>['required', 'mimes:mp4', 'max:40000'],
+            'src'=>['required', 'mimes:mp4,mov', 'max:5120000'],
             'title'=>'required',
             'descr'=>'required',
             "visibility"=>'required',

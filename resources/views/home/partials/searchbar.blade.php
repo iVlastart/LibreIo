@@ -2,7 +2,7 @@
 <div class="mx-auto relative">
     <input id="search-bar" type="search" maxlength="30" placeholder="Search" 
             class="px-4 py-2 w-[20rem] rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-500" 
-            id="search-input">
+            id="search-input" autocomplete="off" aria-label="Search">
     <button id="search-btn" class="absolute right-0 top-0 h-full px-4 
             bg-blue-500 text-white rounded-r-full flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
