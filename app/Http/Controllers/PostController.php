@@ -264,14 +264,13 @@ class PostController extends Controller
         if (!file_exists($path)) abort(404);
 
         $size = filesize($path);
-        $stream = fopen($path, 'rb'); // use 'rb' for binary
+        $stream = fopen($path, 'rb');
         $resp_code = 200;
         $headers = [
-            'Content-Type' => 'video/mp4', // correct MIME type
+            'Content-Type' => 'video/mp4',
             'Accept-Ranges' => 'bytes',
         ];
 
-        // Handle Range requests for streaming
         $range = $request->header('Range');
         if ($range) 
         {
@@ -293,7 +292,6 @@ class PostController extends Controller
             $headers['Content-Length'] = $size;
         }
 
-        // This will stream in the browser
         return response()->stream(function () use ($stream) {
             fpassthru($stream);
         }, $resp_code, $headers);

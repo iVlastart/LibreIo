@@ -103,12 +103,18 @@ function handleKeydown(e)
             break;
 
         case '0':
-            video.currentTime = video.duration*0;
+            calcSkip(0)
             break;
         case '5':
-            
+            calcSkip(5);
             break;
     }
+}
+
+function calcSkip(num)
+{
+    
+    video.currentTime = (video.duration/video.duration)*num;
 }
 
 //view mods
