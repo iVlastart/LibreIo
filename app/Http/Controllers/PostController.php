@@ -46,12 +46,18 @@ class PostController extends Controller
             'thumbnail'=>['nullable', 'mimes:jpg,jpeg,png,webp']
         ]);
         $data['slug'] = $this->makeUniqueSlug($data['title']);
-        $file = $data['src'];
         unset($data['src']);
+        $reqFile = $request->file('src');
+        $outputDir = storage_path('app/public/uploads/'.$data['slug']);
+        if (!file_exists($outputDir)) {
+            mkdir($outputDir, 0777, true);
+        }
 
-        $path = $file->store('uploads/'.$data['slug'], 'public');
-        $filename = basename($path);
+        $fileNameWithoutExt = pathinfo($reqFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $finalname = $fileNameWithoutExt.'.mp4';
+        $reqFile->move($outputDir, $finalname);
 
+        $data['src'] = 'uploads/'.$data['slug'].'/'.$finalname;
         //$vidOutput = [];
         //exec('ffmpeg -i '.escapeshellarg($filename).' -c copy -movflags faststart '.escapeshellarg($path).' 2>&1', $vidOutput);
 
@@ -70,14 +76,14 @@ class PostController extends Controller
         {
             //thumbnail was not provided thus thumbnail will be the 1st frame
             $output = [];
-            $vidPath = storage_path('app/public/uploads/' . $data['slug']. '/'.$filename);
+            $inputPath = storage_path('app/public/uploads/' . $data['slug'] . '/' . $finalname);
             $imgPath = storage_path('app/public/uploads/' . $data['slug'].'/'.$data['slug'].'-preview.webp');
-            exec('ffmpeg -i '.escapeshellarg($vidPath).' -vframes 1 -q:v 90 '.escapeshellarg($imgPath).' 2>&1', $output);
+            exec('ffmpeg -i '.escapeshellarg($inputPath).' -vframes 1 -q:v 90 '.escapeshellarg($imgPath).' 2>&1', $output);
             $data['thumbnail'] = 'uploads/' . $data['slug'].'/'.$data['slug'].'-preview.webp';
         }
 
 
-        $data['src'] = $path;
+        $data['src'] = 'uploads/' . $data['slug']. '/'.$fileNameWithoutExt.'.mp4';
         $data['user_id'] = Auth::id();
         
         $data['published_at'] = now();

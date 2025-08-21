@@ -3,9 +3,11 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
+//php.ini edits
 ini_set('memory_limit', '12G');
 ini_set('post_max_size', '10G');
 ini_set('upload_max_filesize', '5G');
+
 define('LARAVEL_START', microtime(true));
 
 // Determine if the application is in maintenance mode...
