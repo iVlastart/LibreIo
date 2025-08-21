@@ -94,11 +94,11 @@ function handleKeydown(e)
             break;
         case "arrowleft":
         case "j":
-            skip(Number(5));
+            skip(Number(-5));
             break;
         case "arrowright":
         case "l":
-            skip(Number(-5));
+            skip(Number(5));
             break;
     }
 }

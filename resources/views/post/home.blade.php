@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibreIo / {{$title}}</title>
     <!-- Scripts -->
-    @vite(['resources/css/video-player.css', 'resources/js/video-player.js', 'resources/js/like-handler.js', 'resources/js/date-handler.js', 'resources/js/number-handler.js',
+    @vite(['resources/js/like-handler.js', 'resources/js/date-handler.js', 'resources/js/number-handler.js',
             'resources/js/save-handler.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -13,7 +13,7 @@
     <x-app-layout>
         {{-- video --}}
         <section>
-            @include('post.partials.video-player', ['src'=>$src])
+            @include('post.video-player.video-player', ['id'=>$id])
         </section>
 
         {{-- title --}}

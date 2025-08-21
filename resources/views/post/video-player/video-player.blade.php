@@ -1,4 +1,5 @@
-@props(['src'=>null])
+@props(['id'=>null])
+@vite(['resources/css/video-player.css', 'resources/js/video-player.js'])
 <div class="video-container aspect-video paused" data-volume-level="low">
         <div class="video-controls-container">
             <div class="timeline-container">
@@ -58,5 +59,5 @@
                 </button>
             </div>
         </div>
-    <video src="{{ asset("/storage/$src") }}" class="w-full h-auto max-w-full rounded-md"></video>
+    <video src="{{ url('video', $id) }}" class="w-full h-auto max-w-full rounded-md"></video>
 </div>

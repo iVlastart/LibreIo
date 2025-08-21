@@ -18,6 +18,10 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+    
+    <FilesMatch "\.(mp4|mov)$">
+        Header set Accept-Ranges bytes
+    </FilesMatch>
     #php_value memory_limit 12GB
 
     #php_value post_max_size 10GB

@@ -33,6 +33,7 @@ Route::get('/search/{query}', [PostController::class, 'search'])->name('post.sea
 Route::get('/following', [PostController::class, 'following'])->name('following')->middleware(['auth', 'verified']);
 
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
+Route::get('/video/{id}', [PostController::class, 'streamVideo'])->name('video.stream');
 
 //create a post
 Route::middleware(['auth', 'verified'])->group(function(){
