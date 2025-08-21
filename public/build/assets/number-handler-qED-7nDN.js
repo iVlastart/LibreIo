@@ -1,0 +1,1 @@
+document.querySelectorAll(".number").forEach(o=>{const e=parseInt(o.textContent,10);let t;e<1e3?t=e:e<1e6?t=(e/1e3).toFixed(1).replace(/\.0$/,"")+"K":t=(e/1e6).toFixed(1).replace(/\.0$/,"")+"M",o.textContent=t});

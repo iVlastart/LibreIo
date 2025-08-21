@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded",()=>{document.querySelectorAll(".preview-container").forEach(e=>{const t=e.dataset.slug;t&&e.addEventListener("click",()=>{location.assign("/watch/"+t)})})});
