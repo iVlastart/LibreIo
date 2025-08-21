@@ -105,16 +105,39 @@ function handleKeydown(e)
         case '0':
             calcSkip(0)
             break;
+        case '1':
+            calcSkip(1)
+            break;
+        case '2':
+            calcSkip(2)
+            break;
+        case '3':
+            calcSkip(3)
+            break;
+        case '4':
+            calcSkip(4)
+            break;
         case '5':
             calcSkip(5);
+            break;
+        case '6':
+            calcSkip(6)
+            break;
+        case '7':
+            calcSkip(7)
+            break;
+        case '8':
+            calcSkip(8)
+            break;
+        case '9':
+            calcSkip(9)
             break;
     }
 }
 
 function calcSkip(num)
 {
-    
-    video.currentTime = (video.duration/video.duration)*num;
+    video.currentTime = video.duration/10*num;
 }
 
 //view mods
