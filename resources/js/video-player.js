@@ -62,7 +62,7 @@ video.addEventListener('timeupdate', ()=>{
     }
 });
 timelineContainer.addEventListener('mousemove', timelineUpdate);
-timelineContainer.addEventListener('mousedown', toggleScrubbing);
+//timelineContainer.addEventListener('mousedown', toggleScrubbing);
 
 //like dislike a post
 
@@ -72,6 +72,7 @@ function handleKeydown(e)
     const tagName = document.activeElement.tagName.toLowerCase();
     
     if(tagName==="input") return;
+    console.log(e.key.toLowerCase())
     switch(e.key.toLowerCase())
     {
         case " ":
@@ -99,6 +100,13 @@ function handleKeydown(e)
         case "arrowright":
         case "l":
             skip(Number(5));
+            break;
+
+        case '0':
+            video.currentTime = video.duration*0;
+            break;
+        case '5':
+            
             break;
     }
 }
@@ -164,7 +172,7 @@ function timelineUpdate(e)
     }
 }
 
-let isScrubbing = false;
+/*let isScrubbing = false;
 let wasPaused;
 function toggleScrubbing(e)
 {
@@ -185,7 +193,7 @@ function toggleScrubbing(e)
     }
 
     timelineUpdate(e);
-}
+}*/
 
 function skip(t)
 {

@@ -261,41 +261,42 @@ class PostController extends Controller
         $src = Post::where('id', $id)->pluck('src')->first();
 		$path = storage_path('app/public/'.$src);
 
-        if (!file_exists($path)) {
-    abort(404);
-}
+        if (!file_exists($path)) abort(404);
 
-$size = filesize($path);
-$stream = fopen($path, 'rb'); // use 'rb' for binary
-$resp_code = 200;
-$headers = [
-    'Content-Type' => 'video/mp4', // correct MIME type
-    'Accept-Ranges' => 'bytes',
-];
+        $size = filesize($path);
+        $stream = fopen($path, 'rb'); // use 'rb' for binary
+        $resp_code = 200;
+        $headers = [
+            'Content-Type' => 'video/mp4', // correct MIME type
+            'Accept-Ranges' => 'bytes',
+        ];
 
-// Handle Range requests for streaming
-$range = $request->header('Range');
-if ($range) {
-    list(, $range) = explode('=', $range, 2);
-    $range = explode('-', $range);
-    $start = intval($range[0]);
-    $end = $range[1] !== '' ? intval($range[1]) : $size - 1;
+        // Handle Range requests for streaming
+        $range = $request->header('Range');
+        if ($range) 
+        {
+            list(, $range) = explode('=', $range, 2);
+            $range = explode('-', $range);
+            $start = intval($range[0]);
+            $end = $range[1] !== '' ? intval($range[1]) : $size - 1;
 
-    fseek($stream, $start);
+            fseek($stream, $start);
 
-    $length = $end - $start + 1;
-    $resp_code = 206;
+            $length = $end - $start + 1;
+            $resp_code = 206;
 
-    $headers['Content-Range'] = "bytes $start-$end/$size";
-    $headers['Content-Length'] = $length;
-} else {
-    $headers['Content-Length'] = $size;
-}
+            $headers['Content-Range'] = "bytes $start-$end/$size";
+            $headers['Content-Length'] = $length;
+        } 
+        else 
+        {
+            $headers['Content-Length'] = $size;
+        }
 
-// This will stream in the browser
-return response()->stream(function () use ($stream) {
-    fpassthru($stream);
-}, $resp_code, $headers);
+        // This will stream in the browser
+        return response()->stream(function () use ($stream) {
+            fpassthru($stream);
+        }, $resp_code, $headers);
     }
 
     private function makeUniqueSlug($title) {
