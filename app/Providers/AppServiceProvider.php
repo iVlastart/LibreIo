@@ -27,14 +27,22 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        VerifyEmail::toMailUsing(function ($notifiable, $url) {
-            Log::info('Verification URL generated: '.$url);
+        VerifyEmail::createUrlUsing(function ($notifiable) {
+    $url = URL::temporarySignedRoute(
+        'verification.verify',
+        now()->addHours(6),
+        [
+            'id'   => $notifiable->getKey(),
+            'hash' => sha1($notifiable->getEmailForVerification()),
+        ]
+    );
 
-            return (new \Illuminate\Notifications\Messages\MailMessage)
-                ->subject('Verify Email Address')
-                ->line('Please click the button below to verify your email address.')
-                ->action('Verify Email Address', $url);
-            }
-        );
+    Log::info('Generated verification URL', [
+        'url' => $url,
+        'app_key' => config('app.key'),
+    ]);
+
+    return $url;
+});
     }
 }
