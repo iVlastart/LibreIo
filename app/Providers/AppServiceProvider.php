@@ -26,16 +26,5 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
-
-        VerifyEmail::createUrlUsing(function ($notifiable) {
-            return URL::temporarySignedRoute(
-                'verification.verify',
-                Carbon::now()->addHours(12),
-                [
-                    'id' => $notifiable->getKey(),
-                    'hash' => sha1($notifiable->getEmailForVerification()),
-                ]
-            );
-        });
     }
 }
