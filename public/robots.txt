@@ -3,3 +3,4 @@ Disallow: /like
 Disallow: /save
 Disallow: /follow
 Disallow: /upload-pfp
+Disallow: /delete-post

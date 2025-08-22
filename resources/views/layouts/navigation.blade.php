@@ -52,6 +52,12 @@
                             </div>
                         </x-dropdown-link>
 
+                        {{--<x-dropdown-link href="">
+                            <div class="flex items-center">
+                                {{ __('Support the app') }}
+                            </div>
+                        </x-dropdown-link>--}}
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

@@ -137,6 +137,7 @@ class PostController extends Controller
         $followers = Follow::where('followed_id', $user->id)->count();
         return view('post.home')->with([
             'id'=>$post->id,
+            'userID'=>$user->id,
             'title' => $post->title,
             'description'=>$post->descr,
             'src'=>$post->src,
@@ -173,9 +174,16 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        //
+        $data = $request->validate([
+            'post_id'=>'required|exists:posts,id'
+        ]);
+
+        Post::query()
+            ->where('id', $data['post_id'])
+            ->where('user_id', Auth::id())
+            ->delete();
     }
 
     public function like(Request $request)

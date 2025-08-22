@@ -6,7 +6,7 @@
     <title>LibreIo / {{$title}}</title>
     <!-- Scripts -->
     @vite(['resources/js/like-handler.js', 'resources/js/date-handler.js', 'resources/js/number-handler.js',
-            'resources/js/save-handler.js'])
+            'resources/js/save-handler.js', 'resources/js/delete-handler.js'])
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -26,6 +26,9 @@
                     'likeCount'=>$likeCount, 'dislikeCount'=>$dislikeCount])
             @include('post.partials.save-form', ['id'=>$id,'isSaved'=>$isSaved])
             @include('post.partials.download-form', ['src'=>$src])
+            @if(Auth::id()===$userID)
+                @include('post.partials.delete-form', ['id'=>$id])
+            @endif
         </section>
 
         {{-- uploader --}}

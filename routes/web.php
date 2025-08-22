@@ -35,10 +35,11 @@ Route::get('/following', [PostController::class, 'following'])->name('following'
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
 Route::get('/video/{id}', [PostController::class, 'streamVideo'])->name('video.stream');
 
-//create a post
+//create or delete a post
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
+    Route::delete('/delete-post', [PostController::class, 'destroy'])->name('post.delete');
 });
 
 //like dislike and save a post
