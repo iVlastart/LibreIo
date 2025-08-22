@@ -117,7 +117,7 @@
                             Contact Us
                         </h1>
                         <div class="flex flex-col sm:flex-row gap-6 mt-8">
-                            <p class="text-center w-full">email: contact@libreio.com</p>
+                            <p class="text-center w-full">email: libreiocontact@gmail.com</p>
                         </div>
                     </div>
                 </div>

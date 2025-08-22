@@ -1,3 +1,3 @@
-In progress...
+LibreIo is a web app where you can share videos with others.
 
-This is my personal projects built in Laravel. It is just a small app where you can share your videos with others.
+This is a full stack app built in Laravel.
