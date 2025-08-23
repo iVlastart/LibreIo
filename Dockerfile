@@ -28,10 +28,6 @@ COPY --from=frontend /app/node_modules ./node_modules
 # Install PHP deps
 RUN composer install --no-dev --optimize-autoloader
 
-# Setup SQLite DB
-RUN mkdir -p database && touch database/database.sqlite
-RUN chmod -R 777 database
-
 # Clear caches
 RUN php artisan config:clear \
     && php artisan route:clear \

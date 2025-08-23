@@ -1,13 +1,6 @@
 #!/bin/bash
 set -e
 
-# Ensure database folder and file exist
-mkdir -p /var/www/database
-if [ ! -f /var/www/database/database.sqlite ]; then
-    touch /var/www/database/database.sqlite
-fi
-chmod -R 777 /var/www/database
-
 # Run migrations first
 php artisan migrate --force
 
