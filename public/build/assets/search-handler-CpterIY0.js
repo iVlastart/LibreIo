@@ -1,0 +1,1 @@
+const c=document.getElementById("search-btn"),e=document.getElementById("search-bar");e.addEventListener("keypress",t=>{t.key==="Enter"&&n()});c.addEventListener("click",()=>{n()});function n(){e.value!==""&&location.assign("/search/"+encodeURIComponent(e.value))}

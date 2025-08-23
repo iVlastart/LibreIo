@@ -75,6 +75,12 @@
     "src": "resources/js/save-handler.js",
     "isEntry": true
   },
+  "resources/js/search-handler.js": {
+    "file": "assets/search-handler-CpterIY0.js",
+    "name": "search-handler",
+    "src": "resources/js/search-handler.js",
+    "isEntry": true
+  },
   "resources/js/vid-click-handler.js": {
     "file": "assets/vid-click-handler-CrVFxH4J.js",
     "name": "vid-click-handler",
