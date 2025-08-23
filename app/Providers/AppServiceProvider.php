@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (config('app.env') === 'production') {
+        /*if (config('app.env') === 'production') {
             URL::forceScheme('https');
         }
 
@@ -39,6 +39,6 @@ class AppServiceProvider extends ServiceProvider
 
             // Replace the base URL with the app URL from config
             return str_replace(url('/'), rtrim($appUrl, '/'), $temporarySignedURL);
-        });
+        });*/
     }
 }
