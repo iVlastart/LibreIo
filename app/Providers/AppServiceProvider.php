@@ -25,16 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
+        if ($this->app->environment('production') && isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+            URL::forceScheme($_SERVER['HTTP_X_FORWARDED_PROTO']);
         }
-
-        Request::setTrustedProxies(
-            ['*'], // Trust all proxies
-            Request::HEADER_X_FORWARDED_FOR |
-            Request::HEADER_X_FORWARDED_HOST |
-            Request::HEADER_X_FORWARDED_PORT |
-            Request::HEADER_X_FORWARDED_PROTO
-        );
     }
 }
