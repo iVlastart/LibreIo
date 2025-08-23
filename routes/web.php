@@ -27,29 +27,29 @@ Route::get('/home', function (Request $request) {
     }
 
     return view('home.home', compact('posts'));
-})->middleware(['auth', 'verified'])->name('home');
+})->middleware(['auth'/*, 'verified'*/])->name('home');
 
-Route::get('/search/{query}', [PostController::class, 'search'])->name('post.search')->middleware(['auth', 'verified']);
-Route::get('/following', [PostController::class, 'following'])->name('following')->middleware(['auth', 'verified']);
+Route::get('/search/{query}', [PostController::class, 'search'])->name('post.search')->middleware(['auth'/*, 'verified'*/]);
+Route::get('/following', [PostController::class, 'following'])->name('following')->middleware(['auth'/*, 'verified'*/]);
 
 Route::get('/watch/{id}',[PostController::class, 'show'])->name('post.watch');
 Route::get('/video/{id}', [PostController::class, 'streamVideo'])->name('video.stream');
 
 //create or delete a post
-Route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth'/*, 'verified'*/])->group(function(){
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post/create', [PostController::class, 'store'])->name('post.store');
     Route::delete('/delete-post', [PostController::class, 'destroy'])->name('post.delete');
 });
 
 //like dislike and save a post
-Route::middleware(['auth', 'verified'])->group(function(){
+Route::middleware(['auth'/*, 'verified'*/])->group(function(){
     Route::post('/like', [PostController::class, 'like'])->name('post.like');
     Route::post('/save', [PostController::class, 'save'])->name('post.save');
 });
 
 //follow a person and upload a profile picture
-Route::middleware(['auth', 'verified'])->group(function (){
+Route::middleware(['auth'/*, 'verified'*/])->group(function (){
     Route::post('/follow', [FollowController::class, 'follow'])->name('profile.follow');
     Route::post('/upload-pfp', [ProfileController::class, 'uploadPfp'])->name('profile.upload.pfp');
 });
