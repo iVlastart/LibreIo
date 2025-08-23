@@ -25,8 +25,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if ($this->app->environment('production') && isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
-            URL::forceScheme($_SERVER['HTTP_X_FORWARDED_PROTO']);
+        if (config('app.env') === 'production') {
+            URL::forceScheme('https');
         }
+
+        VerifyEmail::createUrlUsing(function ($notifiable) {
+            $appUrl = config('app.url');
+            $temporarySignedURL = URL::temporarySignedRoute(
+                'verification.verify',
+                Carbon::now()->addMinutes(60),
+                ['id' => $notifiable->getKey(), 'hash' => sha1($notifiable->getEmailForVerification())]
+            );
+
+            // Replace the base URL with the app URL from config
+            return str_replace(url('/'), rtrim($appUrl, '/'), $temporarySignedURL);
+        });
     }
 }
