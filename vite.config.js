@@ -16,6 +16,7 @@ export default defineConfig({
                 'resources/js/like-handler.js',
                 'resources/js/number-handler.js',
                 'resources/js/save-handler.js',
+                'resources/js/search-handler.js',
                 'resources/js/video-player.js',
                 'resources/js/vid-click-handler.js',
             ],
