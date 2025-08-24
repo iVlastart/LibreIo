@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 p-6">
-        <form method="POST" action="{{ route('editor.create') }}" class="max-w-2xl mx-auto mt-10">
+        <form method="POST" action="{{ route('editor.store') }}" class="max-w-2xl mx-auto mt-10">
             @csrf
 
             <div class="mb-4">

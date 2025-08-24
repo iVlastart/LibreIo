@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function(){
     Route::get('/editor', [ProjectController::class, 'index'])->name('editor');
     Route::get('/editor/create', [ProjectController::class, 'create'])->name('editor.create');
+
+    Route::post('editor/create', [ProjectController::class, 'store'])->name('editor.store');
 });
 
 require __DIR__.'/auth.php';
