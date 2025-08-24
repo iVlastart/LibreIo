@@ -3,6 +3,7 @@
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -59,6 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+//editor
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::get('/editor', [ProjectController::class, 'index'])->name('editor');
+    Route::get('/editor/create', [ProjectController::class, 'create'])->name('editor.create');
 });
 
 require __DIR__.'/auth.php';
