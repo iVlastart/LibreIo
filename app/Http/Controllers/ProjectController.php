@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
 {
@@ -27,15 +29,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:30',
+        ]);
+
+        $data['user_id'] = Auth::id();
+
+        Project::create($data);
+
+        return redirect()->route('editor.edit', ['name'=>$data['name']]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $name)
     {
-        //
+        return view('editor.edit', ['name'=>$name]);
     }
 
     /**
