@@ -45,6 +45,11 @@ class ProjectController extends Controller
      */
     public function show(string $name)
     {
+        if(!Project::where('name', $name)->where('user_id', Auth::id())->exists()){
+            return redirect()->route('editor');
+        }
+
+        $project = Project::where('name', $name)->where('user_id', Auth::id())->first();
         return view('editor.edit', ['name'=>$name]);
     }
 
