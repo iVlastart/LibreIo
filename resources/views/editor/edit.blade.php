@@ -35,9 +35,9 @@
                 <p>Drag and drop your files here</p>
             </form>
 
-            <div class="w-full h-full mt-3 flex items-center justify-center hidden
+            <div class="w-full h-full mt-3 flex items-start justify-start hidden
                     border-r-4 border-gray-400" id="uploads">
-                Uploads
+                @include('editor.partials.svg.mp4')
             </div>
 
             <div class="w-full h-full mt-3 flex items-center justify-center hidden" id="subtitles">
