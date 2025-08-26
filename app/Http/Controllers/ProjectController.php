@@ -97,7 +97,10 @@ class ProjectController extends Controller
                 'path'=>$filepath,
                 'name'=>$filename,
                 'type'=>$type,
-                'extension'=>$extension
+                'extension'=>$extension,
+                'track'=>null,
+                'starts'=>'0:00',
+                'ends'=>'0:00'
             ]);
             return json_encode([
                 'filename'=>$filename,
