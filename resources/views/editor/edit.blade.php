@@ -44,6 +44,15 @@
                 Subtitles
             </div>
         </div>
+
+        <div class="w-2/4 h-full border border-black">
+            <div class="w-full h-80 border border-black relative">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+                        bg-black h-3/4 w-3/4">
+                    <video src="" class="h-full w-full"></video>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
