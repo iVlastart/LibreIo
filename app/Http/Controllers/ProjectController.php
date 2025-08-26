@@ -102,6 +102,9 @@ class ProjectController extends Controller
                 'starts'=>'0:00',
                 'ends'=>'0:00'
             ]);
+            Project::where('user_id', Auth::id())
+                ->where('name', $request['name'])
+                ->update($files);
             return json_encode([
                 'filename'=>$filename,
             ]);
