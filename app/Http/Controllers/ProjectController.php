@@ -48,9 +48,10 @@ class ProjectController extends Controller
         if(!Project::where('name', $name)->where('user_id', Auth::id())->exists()){
             return redirect()->route('editor');
         }
-
         $project = Project::where('name', $name)->where('user_id', Auth::id())->first();
-        return view('editor.edit', ['name'=>$name]);
+        $json = $project->original_files;
+        $data = json_decode($json, true);
+        return view('editor.edit', ['name'=>$name, 'files'=>$data]);
     }
 
     /**
@@ -86,6 +87,7 @@ class ProjectController extends Controller
 
         if($request->hasFile(('file')) && Project::where('name', $request['name'])->where('user_id', Auth::id())->exists())
         {
+            $project = Project::where('name', $request['name'])->where('user_id', Auth::id())->first();
             $file = $request->file('file');
             $filename = $file->getClientOriginalName();
             $mime = $file->getClientMimeType();
@@ -93,18 +95,21 @@ class ProjectController extends Controller
             //adding that here cause I'm dumb
             list($type, $extension) = explode('/', $mime);
             $filepath = $file->store('projects/'.Auth::user()->name.'/'.$request['name'].'/'.$type, 'public');
-            $files['original_files'] = json_encode([
-                'path'=>$filepath,
-                'name'=>$filename,
-                'type'=>$type,
-                'extension'=>$extension,
-                'track'=>null,
-                'starts'=>'0:00',
-                'ends'=>'0:00'
+
+            $originalFiles = json_decode($project->original_files, true) ?? [];
+            $newFile = [
+                'path'      => $filepath,
+                'name'      => $filename,
+                'type'      => $type,
+                'extension' => $extension,
+                'track'     => null,
+                'starts'    => '0:00',
+                'ends'      => '0:00',
+            ];
+            $originalFiles[] = $newFile;
+            $project->update([
+                'original_files' => json_encode($originalFiles),
             ]);
-            Project::where('user_id', Auth::id())
-                ->where('name', $request['name'])
-                ->update($files);
             return json_encode([
                 'filename'=>$filename,
             ]);

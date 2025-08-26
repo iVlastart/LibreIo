@@ -5,7 +5,6 @@
             {{ __('Edit Project: ') }} {{ $name }}
         </h2>
     </x-slot>
-    
     <div class="h-[calc(100vh-8.7rem)] overflow-hidden flex m-0 p-0">
         <div class="w-1/4 ml-2" id="container">
             <div class="flex flex-row justify-start gap-4 items-center">
@@ -37,7 +36,7 @@
 
             <div class="w-full h-full mt-3 flex items-start justify-start hidden
                     border-r-4 border-gray-400" id="uploads">
-                @include('editor.partials.files.files')
+                @include('editor.partials.files.files', ['files'=>$files])
             </div>
 
             <div class="w-full h-full mt-3 flex items-center justify-center hidden" id="subtitles">
