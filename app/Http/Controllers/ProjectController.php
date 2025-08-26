@@ -80,15 +80,27 @@ class ProjectController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
+            'name' => ['required', 'exists:projects,name'],
             'file' => ['required', 'mimes:mp4,mov,mkv,mp3,jpg,jpeg,png', 'max:5120000']
         ]);
 
-        if($request->hasFile(('file')))
+        if($request->hasFile(('file')) && Project::where('name', $request['name'])->where('user_id', Auth::id())->exists())
         {
             $file = $request->file('file');
-            $name = $file->getClientOriginalName();
+            $filename = $file->getClientOriginalName();
+            $mime = $file->getClientMimeType();
+            //type is image video audio extension is mp4 mp3 jpeg etc...
+            //adding that here cause I'm dumb
+            list($type, $extension) = explode('/', $mime);
+            $filepath = $file->store('projects/'.Auth::user()->name.'/'.$request['name'].'/'.$type, 'public');
+            $files['original_files'] = json_encode([
+                'path'=>$filepath,
+                'name'=>$filename,
+                'type'=>$type,
+                'extension'=>$extension
+            ]);
             return json_encode([
-                'name'=>$name
+                'filename'=>$filename,
             ]);
         }
         

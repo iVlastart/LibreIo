@@ -30,6 +30,7 @@
                         cursor-pointer relative border-4 border-dashed border-gray-400 hidden"
                 id="dropzone">
                 @csrf
+                <input name="name" type="hidden" value="{{ $name }}">
                 <input type="file" name="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
                 <p>Drag and drop your files here</p>
             </form>
