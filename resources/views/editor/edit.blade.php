@@ -25,7 +25,6 @@
                 </button>
             </div>
             <form 
-                method="POST" 
                 class="w-full h-full  mt-3 flex items-center justify-center text-center 
                         text-lg font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 transition-colors 
                         cursor-pointer relative border-4 border-dashed border-gray-400 hidden"
@@ -37,11 +36,11 @@
 
             <div class="w-full h-full mt-3 flex items-start justify-start hidden
                     border-r-4 border-gray-400" id="uploads">
-                @include('editor.partials.file')
+                @include('editor.partials.files.files')
             </div>
 
             <div class="w-full h-full mt-3 flex items-center justify-center hidden" id="subtitles">
-                Subtitles
+                Coming soon...
             </div>
         </div>
 
@@ -54,25 +53,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const dropzone = document.getElementById("dropzone");
-        const fileInput = dropzone.querySelector("input[type=file]");
-
-        dropzone.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            dropzone.classList.add("bg-gray-200");
-        });
-
-        dropzone.addEventListener("dragleave", () => {
-            dropzone.classList.remove("bg-gray-200");
-        });
-
-        dropzone.addEventListener("drop", (e) => {
-            e.preventDefault();
-            dropzone.classList.remove("bg-gray-200");
-            fileInput.files = e.dataTransfer.files;
-            dropzone.submit();
-        });
-    </script>
 </x-app-layout>

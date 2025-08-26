@@ -4,3 +4,4 @@ Disallow: /save
 Disallow: /follow
 Disallow: /upload-pfp
 Disallow: /delete-post
+Disallow: /editor/upload

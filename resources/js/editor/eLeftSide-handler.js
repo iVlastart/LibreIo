@@ -11,9 +11,11 @@ $(()=>{
     const uploads = $('#uploads');
     const subtitles = $('#subtitles');
 
+    //handle showing/hiding the elements
     $(window).on("load", function() {
       $(`#${activeElem}`).removeClass('hidden');
     });
+
     $('#collapseBtn').on('click', ()=>{
        collapsed
             ? $(`#${activeElem}`).removeClass('hidden')
@@ -45,8 +47,24 @@ $(()=>{
         activeElem = "subtitles";
     });
 
-    
-$(window).on("unload", ()=>{
-    localStorage.setItem("activeElem", activeElem);
-});
+    //save the active element in the local storage when user leaves the page
+    $(window).on("unload", ()=>{
+        localStorage.setItem("activeElem", activeElem);
+    });
+
+
+    dropzone.on('change', function(e){
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        const form = $(e.target).closest('form')[0];
+        const data = new FormData(form);
+
+        $.ajax({
+            type: 'POST',
+            url: '/editor/upload',
+            data: data
+        })
+    });
+
 });
