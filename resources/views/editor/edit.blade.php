@@ -1,4 +1,4 @@
-@vite(['resources/js/editor/eLeftSide-handler.js'])
+@vite(['resources/js/editor/file-upload.js', 'resources/js/editor/toggle-handler.js'])
 <x-app-layout class="overflow-hidden">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -61,41 +61,51 @@
                 <button id="btnExport" class="hover:scale-105 transition-transform duration-300">Export</button>
             </div>
             <hr>
-            <div class="ml-2 flex flex-col">
-                <x-input-label :value="__('Position')"/>
-                <div class="w-full flex flex-row justify-start items-center gap-x-14 mt-2">
-                    <div>
-                        <span class="mr-2 capitalize">x:</span>
-                        <input type="number" name="" class="" min="0" max="100">
+            <div class="ml-2 flex flex-col h-full">
+                <div id="general" class="hidden h-full">
+                    <x-input-label :value="__('Position')"/>
+                    <div class="w-full flex flex-row justify-start items-center gap-x-14 mt-2">
+                        <div>
+                            <span class="mr-2 capitalize">x:</span>
+                            <input type="number" name="" class="" min="0" max="100">
+                        </div>
+                        <div>
+                            <span class="mr-2 capitalize">y:</span>
+                            <input type="number" name="" class="" min="0" max="100">
+                        </div>
                     </div>
-                    <div>
-                        <span class="mr-2 capitalize">y:</span>
-                        <input type="number" name="" class="" min="0" max="100">
+
+                    <x-input-label :value="__('Height')"/>
+                    <div class="w-full flex flex-row justify-start items-center gap-x-8 mt-2">
+                        <div>
+                            <span class="mr-2 capitalize">width:</span>
+                            <input type="number" name="" class="" min="0" max="100">
+                        </div>
+                        <div>
+                            <span class="mr-2 capitalize">height:</span>
+                            <input type="number" name="" class="" min="0" max="100">
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-col justify-center gap-y-2 mt-2">
+                        <x-input-label for="Quality" :value="__('Quality')"/>
+                        <select name="Quality" id="quality" class="hover:cursor-pointer">
+                            <option value="144">144p</option>
+                            <option value="240">240p</option>
+                            <option value="360">360p</option>
+                            <option value="480">480p</option>
+                            <option value="720">720p</option>
+                            <option value="1080">1080p</option>
+                        </select>
                     </div>
                 </div>
 
-                <x-input-label :value="__('Height')"/>
-                <div class="w-full flex flex-row justify-start items-center gap-x-8 mt-2">
-                    <div>
-                        <span class="mr-2 capitalize">width:</span>
-                        <input type="number" name="" class="" min="0" max="100">
-                    </div>
-                    <div>
-                        <span class="mr-2 capitalize">height:</span>
-                        <input type="number" name="" class="" min="0" max="100">
-                    </div>
-                </div>
-                <div class="w-full flex flex-col justify-center gap-y-2 mt-2">
-                    <x-input-label for="Quality" :value="__('Quality')"/>
-                    <select name="Quality" id="quality" class="hover:cursor-pointer">
-                        <option value="144">144p</option>
-                        <option value="240">240p</option>
-                        <option value="360">360p</option>
-                        <option value="480">480p</option>
-                        <option value="720">720p</option>
-                        <option value="1080">1080p</option>
-                    </select>
-                </div>
+                <div id="effects" class="hidden flex items-center justify-center h-full">
+                Coming soon...
+            </div>
+
+            <div id="export" class="hidden flex items-center justify-center h-full">
+                Exporting...
+            </div>
             </div>
         </div>
     </div>

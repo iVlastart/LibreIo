@@ -1,9 +1,9 @@
 import $ from 'jquery';
 
-//script to handle the left side of the video editor 
 $(()=>{
     let collapsed = false;
     let activeElem = localStorage.getItem('activeElem') ?? "dropzone";
+    let activeOption = localStorage.getItem('activeOption') ?? "general";
     const dropzone = $('#dropzone');
     const nav = $('#nav');
     const collapseSvg = $('#collapseSvg');
@@ -11,9 +11,14 @@ $(()=>{
     const uploads = $('#uploads');
     const subtitles = $('#subtitles');
 
+    const general = $('#general');
+    const effects = $('#effects');
+    const exprt = $('#export'); 
+
     //handle showing/hiding the elements
     $(window).on("load", function() {
       $(`#${activeElem}`).removeClass('hidden');
+      $(`#${activeOption}`).removeClass('hidden');
     });
 
     $('#collapseBtn').on('click', ()=>{
@@ -47,39 +52,30 @@ $(()=>{
         activeElem = "subtitles";
     });
 
+    $('#btnGeneral').on('click', ()=>{
+        general.removeClass('hidden');
+        effects.addClass('hidden');
+        exprt.addClass('hidden');
+        activeOption = "general";
+    });
+
+    $('#btnEffects').on('click', ()=>{
+        general.addClass('hidden');
+        effects.removeClass('hidden');
+        exprt.addClass('hidden');
+        activeOption = "effects";
+    });
+
+    $('#btnExport').on('click', ()=>{
+        general.addClass('hidden');
+        effects.addClass('hidden');
+        exprt.removeClass('hidden');
+        activeOption = "export";
+    });
+
     //save the active element in the local storage when user leaves the page
     $(window).on("unload", ()=>{
         localStorage.setItem("activeElem", activeElem);
+        localStorage.setItem("activeOption", activeOption);
     });
-
-
-    dropzone.on('change', function(e){
-        getHead();
-        const form = $(e.target).closest('form')[0];
-        const data = new FormData(form);
-
-        $.ajax({
-            type: 'POST',
-            url: '/editor/upload',
-            data: data,
-            processData: false,
-            contentType: false,
-            success: (resp)=>{
-                console.log(resp);
-            },
-            error: (xhr, status)=>{
-                console.log(xhr.responseText);
-            }
-        })
-    });
-
-});
-
-function getHead()
-{
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-}
+})
