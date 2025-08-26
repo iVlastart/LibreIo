@@ -23,6 +23,7 @@
                     </svg>
                 </button>
             </div>
+            <hr>
             <form
                 class="w-full h-full  mt-3 flex items-center justify-center text-center 
                         text-lg font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 transition-colors 
@@ -55,9 +56,46 @@
 
         <div class="w-1/4 h-full border border-black">
             <div id="options" class="flex flex-row gap-4 items-center justify-center">
-                <button id="dropzoneBtn" class="hover:scale-105 transition-transform duration-300">Dropzone</button>
-                <button id="uploadsBtn" class="hover:scale-105 transition-transform duration-300">Uploaded files</button>
-                <button id="subtitlesBtn" class="hover:scale-105 transition-transform duration-300">Subtitles</button>
+                <button id="btnGeneral" class="hover:scale-105 transition-transform duration-300">General</button>
+                <button id="btnEffects" class="hover:scale-105 transition-transform duration-300">Effects</button>
+                <button id="btnExport" class="hover:scale-105 transition-transform duration-300">Export</button>
+            </div>
+            <hr>
+            <div class="ml-2 flex flex-col">
+                <x-input-label :value="__('Position')"/>
+                <div class="w-full flex flex-row justify-start items-center gap-x-14 mt-2">
+                    <div>
+                        <span class="mr-2 capitalize">x:</span>
+                        <input type="number" name="" class="" min="0" max="100">
+                    </div>
+                    <div>
+                        <span class="mr-2 capitalize">y:</span>
+                        <input type="number" name="" class="" min="0" max="100">
+                    </div>
+                </div>
+
+                <x-input-label :value="__('Height')"/>
+                <div class="w-full flex flex-row justify-start items-center gap-x-8 mt-2">
+                    <div>
+                        <span class="mr-2 capitalize">width:</span>
+                        <input type="number" name="" class="" min="0" max="100">
+                    </div>
+                    <div>
+                        <span class="mr-2 capitalize">height:</span>
+                        <input type="number" name="" class="" min="0" max="100">
+                    </div>
+                </div>
+                <div class="w-full flex flex-col justify-center gap-y-2 mt-2">
+                    <x-input-label for="Quality" :value="__('Quality')"/>
+                    <select name="Quality" id="quality" class="hover:cursor-pointer">
+                        <option value="144">144p</option>
+                        <option value="240">240p</option>
+                        <option value="360">360p</option>
+                        <option value="480">480p</option>
+                        <option value="720">720p</option>
+                        <option value="1080">1080p</option>
+                    </select>
+                </div>
             </div>
         </div>
     </div>
