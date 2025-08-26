@@ -67,7 +67,7 @@
             </div>
 
             <div class="w-full h-full border border-black">
-
+                
             </div>
         </div>
 
