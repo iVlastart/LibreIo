@@ -51,7 +51,11 @@ class ProjectController extends Controller
         $project = Project::where('name', $name)->where('user_id', Auth::id())->first();
         $json = $project->original_files;
         $data = json_decode($json, true);
-        return view('editor.edit', ['name'=>$name, 'files'=>$data]);
+        return view('editor.edit', [
+                    'id'=>$project->id,
+                    'name'=>$name, 
+                    'files'=>$data
+        ]);
     }
 
     /**
@@ -115,5 +119,52 @@ class ProjectController extends Controller
             ]);
         }
         
+    }
+
+    public function streamVideoPreview($id, $name, Request $request)
+    {
+        $file = Project::where('id', $id)
+                        ->first();
+        $data = json_decode($file->original_files, true);
+        foreach($data as $json)
+        {
+            if($json['name']!==$name) continue;
+            $path = storage_path('app/public/'.$json['path']);
+
+            if (!file_exists($path)) abort(404);
+
+            $size = filesize($path);
+            $stream = fopen($path, 'rb');
+            $resp_code = 200;
+            $headers = [
+                'Content-Type' => $file->type.'/'.$file->extension,
+                'Accept-Ranges' => 'bytes',
+            ];
+
+            $range = $request->header('Range');
+            if ($range) 
+            {
+                list(, $range) = explode('=', $range, 2);
+                $range = explode('-', $range);
+                $start = intval($range[0]);
+                $end = $range[1] !== '' ? intval($range[1]) : $size - 1;
+
+                fseek($stream, $start);
+
+                $length = $end - $start + 1;
+                $resp_code = 206;
+
+                $headers['Content-Range'] = "bytes $start-$end/$size";
+                $headers['Content-Length'] = $length;
+            } 
+            else 
+            {
+                $headers['Content-Length'] = $size;
+            }
+
+            return response()->stream(function () use ($stream) {
+                fpassthru($stream);
+            }, $resp_code, $headers);
+        }
     }
 }

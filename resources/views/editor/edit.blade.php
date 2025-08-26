@@ -37,7 +37,7 @@
 
             <div class="w-full h-full mt-3 flex items-start justify-start hidden
                     border-r-4 border-gray-400" id="uploads">
-                @include('editor.partials.files.files', ['files'=>$files])
+                @include('editor.partials.files.files', ['files'=>$files, 'projectID'=>$id])
             </div>
 
             <div class="w-full h-full mt-3 flex items-center justify-center hidden" id="subtitles">
@@ -103,25 +103,24 @@
                             <input type="number" name="" class="" min="0" max="100">
                         </div>
                     </div>
-                    <div class="w-full flex flex-col justify-center gap-y-2 mt-2">
-                        <x-input-label for="Quality" :value="__('Quality')"/>
-                        <select name="Quality" id="quality" class="hover:cursor-pointer">
-                            <option value="144">144p</option>
-                            <option value="240">240p</option>
-                            <option value="360">360p</option>
-                            <option value="480">480p</option>
-                            <option value="720">720p</option>
-                            <option value="1080">1080p</option>
-                        </select>
-                    </div>
                 </div>
 
                 <div id="effects" class="hidden flex items-center justify-center h-full">
                 Coming soon...
             </div>
 
-            <div id="export" class="hidden flex items-center justify-center h-full">
-                Exporting...
+            <div id="export" class="hidden flex items-start justify-center h-full">
+                <div class="w-full flex flex-col justify-center gap-y-2 mt-2">
+                    <x-input-label for="Quality" :value="__('Quality')"/>
+                    <select name="Quality" id="quality" class="hover:cursor-pointer">
+                        <option value="144">144p</option>
+                        <option value="240">240p</option>
+                        <option value="360">360p</option>
+                        <option value="480">480p</option>
+                        <option value="720">720p</option>
+                        <option value="1080">1080p</option>
+                    </select>
+                </div>
             </div>
             </div>
         </div>
