@@ -24,7 +24,7 @@
                     </svg>
                 </button>
             </div>
-            <form 
+            <form
                 class="w-full h-full  mt-3 flex items-center justify-center text-center 
                         text-lg font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 transition-colors 
                         cursor-pointer relative border-4 border-dashed border-gray-400 hidden"

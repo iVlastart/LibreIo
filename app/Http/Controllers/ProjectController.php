@@ -76,4 +76,21 @@ class ProjectController extends Controller
     {
         //
     }
+
+    public function upload(Request $request)
+    {
+        $request->validate([
+            'file' => ['required', 'mimes:mp4,mov,mkv,mp3,jpg,jpeg,png', 'max:5120000']
+        ]);
+
+        if($request->hasFile(('file')))
+        {
+            $file = $request->file('file');
+            $name = $file->getClientOriginalName();
+            return json_encode([
+                'name'=>$name
+            ]);
+        }
+        
+    }
 }
