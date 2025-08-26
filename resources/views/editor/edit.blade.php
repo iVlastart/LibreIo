@@ -52,5 +52,13 @@
                 </div>
             </div>
         </div>
+
+        <div class="w-1/4 h-full border border-black">
+            <div id="options" class="flex flex-row gap-4 items-center justify-center">
+                <button id="dropzoneBtn" class="hover:scale-105 transition-transform duration-300">Dropzone</button>
+                <button id="uploadsBtn" class="hover:scale-105 transition-transform duration-300">Uploaded files</button>
+                <button id="subtitlesBtn" class="hover:scale-105 transition-transform duration-300">Subtitles</button>
+            </div>
+        </div>
     </div>
 </x-app-layout>
