@@ -1,4 +1,4 @@
-@vite(['resources/js/editor/file-upload.js', 'resources/js/editor/toggle-handler.js'])
+@vite(['resources/js/editor/file-upload.js', 'resources/js/editor/toggle-handler.js', 'resources/js/editor/file-handler.js'])
 <x-app-layout class="overflow-hidden">
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -46,11 +46,28 @@
         </div>
 
         <div class="w-2/4 h-full border border-black">
-            <div class="w-full h-80 border border-black relative">
+            <div class="w-full h-80 border border-black relative flex flex-col">
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
                         bg-black h-3/4 w-3/4">
-                    <video src="" class="h-full w-full"></video>
+                    <div id="prev-container" class="h-full w-full relative">
+                        {{--<video src="{{ asset('storage/' . $files[1]['path']) }}" controls class="absolute top-0 left-0 h-full w-full object-cover z-20"></video>
+                        <img src="{{ asset('storage/' . $files[0]['path']) }}" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-1/2 w-1/2 object-cover z-20">
+                        --}}
+                    </div>
                 </div>
+
+                <div class="flex flex-row justify-center items-end h-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="hover:cursor-pointer" viewBox="0 0 16 16">
+                        <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5m5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="hover:cursor-pointer" viewBox="0 0 16 16">
+                        <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="w-full h-full border border-black">
+
             </div>
         </div>
 
