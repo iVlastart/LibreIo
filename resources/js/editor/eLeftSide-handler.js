@@ -3,13 +3,17 @@ import $ from 'jquery';
 //script to handle the left side of the video editor 
 $(()=>{
     let collapsed = false;
-    let activeElem = "dropzone";
+    let activeElem = localStorage.getItem('activeElem') ?? "dropzone";
     const dropzone = $('#dropzone');
     const nav = $('#nav');
     const collapseSvg = $('#collapseSvg');
     const showSvg = $('#showSvg');
     const uploads = $('#uploads');
     const subtitles = $('#subtitles');
+
+    $(window).on("load", function() {
+      $(`#${activeElem}`).removeClass('hidden');
+    });
     $('#collapseBtn').on('click', ()=>{
        collapsed
             ? $(`#${activeElem}`).removeClass('hidden')
@@ -40,4 +44,9 @@ $(()=>{
         subtitles.removeClass('hidden');
         activeElem = "subtitles";
     });
+
+    
+$(window).on("unload", ()=>{
+    localStorage.setItem("activeElem", activeElem);
+});
 });

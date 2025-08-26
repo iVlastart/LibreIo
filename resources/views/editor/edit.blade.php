@@ -28,7 +28,7 @@
                 method="POST" 
                 class="w-full h-full  mt-3 flex items-center justify-center text-center 
                         text-lg font-semibold text-gray-600 bg-gray-50 hover:bg-gray-100 transition-colors 
-                        cursor-pointer relative border-4 border-dashed border-gray-400"
+                        cursor-pointer relative border-4 border-dashed border-gray-400 hidden"
                 id="dropzone">
                 @csrf
                 <input type="file" name="file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
@@ -37,7 +37,7 @@
 
             <div class="w-full h-full mt-3 flex items-start justify-start hidden
                     border-r-4 border-gray-400" id="uploads">
-                @include('editor.partials.svg.mp4')
+                @include('editor.partials.file')
             </div>
 
             <div class="w-full h-full mt-3 flex items-center justify-center hidden" id="subtitles">
