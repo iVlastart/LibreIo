@@ -4,7 +4,7 @@
     "name": "jquery"
   },
   "resources/css/app.css": {
-    "file": "assets/app-bNN9zLk-.css",
+    "file": "assets/app-Ds66CU_l.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -29,6 +29,57 @@
     "name": "date-handler",
     "src": "resources/js/date-handler.js",
     "isEntry": true
+  },
+  "resources/js/delete-handler.js": {
+    "file": "assets/delete-handler-BC3Vl9HB.js",
+    "name": "delete-handler",
+    "src": "resources/js/delete-handler.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DkvTqftU.js"
+    ]
+  },
+  "resources/js/editor/controls-handler.js": {
+    "file": "assets/controls-handler-CpfzAG-A.js",
+    "name": "controls-handler",
+    "src": "resources/js/editor/controls-handler.js",
+    "isEntry": true
+  },
+  "resources/js/editor/export-handler.js": {
+    "file": "assets/export-handler-C2vpMg5t.js",
+    "name": "export-handler",
+    "src": "resources/js/editor/export-handler.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DkvTqftU.js"
+    ]
+  },
+  "resources/js/editor/file-handler.js": {
+    "file": "assets/file-handler-D_8giBVW.js",
+    "name": "file-handler",
+    "src": "resources/js/editor/file-handler.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DkvTqftU.js"
+    ]
+  },
+  "resources/js/editor/file-upload.js": {
+    "file": "assets/file-upload-1Mrzn063.js",
+    "name": "file-upload",
+    "src": "resources/js/editor/file-upload.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DkvTqftU.js"
+    ]
+  },
+  "resources/js/editor/toggle-handler.js": {
+    "file": "assets/toggle-handler-DzMrcm9t.js",
+    "name": "toggle-handler",
+    "src": "resources/js/editor/toggle-handler.js",
+    "isEntry": true,
+    "imports": [
+      "_jquery-DkvTqftU.js"
+    ]
   },
   "resources/js/faq-handler.js": {
     "file": "assets/faq-handler-BxFNh_6s.js",
